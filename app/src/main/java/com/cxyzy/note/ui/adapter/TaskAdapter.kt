@@ -10,7 +10,7 @@ import com.cxyzy.note.R
 import com.cxyzy.note.db.bean.Task
 import kotlinx.android.synthetic.main.item_task.view.*
 
-class TaskAdapter : PagedListAdapter<Task, TaskAdapter.ViewHolder>(TaskDiffCallback()) {
+class TaskAdapter : PagedListAdapter<Task, TaskAdapter.ViewHolder>(DiffCallback()) {
     private lateinit var onItemClick: (task: Task) -> Unit
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val data = getItem(position) ?: return
@@ -30,7 +30,7 @@ class TaskAdapter : PagedListAdapter<Task, TaskAdapter.ViewHolder>(TaskDiffCallb
     class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!)
 }
 
-private class TaskDiffCallback : DiffUtil.ItemCallback<Task>() {
+private class DiffCallback : DiffUtil.ItemCallback<Task>() {
     override fun areContentsTheSame(oldItem: Task, newItem: Task): Boolean {
         return oldItem.id == newItem.id
     }
