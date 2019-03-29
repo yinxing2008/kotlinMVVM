@@ -1,2 +1,1 @@
-# simpleNote
-a simple note app
+# sample project of kotlin with MVVM
