@@ -31,6 +31,10 @@ buildscript {
         uiAutomatorVersion = '2.2.0'
         workVersion = '1.0.0'
         pagingVersion = '2.1.0'
+
+        kotlinx_coroutines = "0.30.1-eap13"
+        retrofit_version = '2.3.0'
+        okhttp_version = '3.9.1'
     }
     repositories {
 //        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
