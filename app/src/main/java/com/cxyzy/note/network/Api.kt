@@ -1,6 +1,6 @@
 package com.tanzhiqiang.kmvvm.repository
 
-import com.cxyzy.note.network.Weather
+import com.cxyzy.note.db.bean.Task
 import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
 
@@ -8,6 +8,6 @@ interface Api {
     /**
      * 获取天气信息
      */
-    @GET("zaihuishou/Kotlin-mvvm/master/data.json")
-    fun getWeather(): Deferred<Weather>
+    @GET("cxyzy1/kotlinMVVM/master/data_task.json")
+    fun getTask(): Deferred<Task>
 }

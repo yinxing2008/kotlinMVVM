@@ -15,7 +15,7 @@ class MainActivity : BaseActivity<WeatherViewModel>() {
 
     override fun providerToolBar(): Toolbar = toolbar
     override fun initView() {
-        mViewModel?.getWeather(
+        mViewModel?.getTaskFromNetwork(
                 {
                     progress_bar.visibility = View.VISIBLE
                 },
@@ -27,9 +27,8 @@ class MainActivity : BaseActivity<WeatherViewModel>() {
 
     override fun startObserve() {
         mViewModel?.apply {
-            mWeather.observe(this@MainActivity, Observer { it ->
-                tv_hello.text = "${it.data}"
-
+            mWeather.observe(this@MainActivity, Observer {
+                tv_hello.text = it.name
             })
         }
     }

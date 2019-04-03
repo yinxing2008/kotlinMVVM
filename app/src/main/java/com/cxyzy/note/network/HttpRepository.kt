@@ -23,6 +23,6 @@ object HttpRepository {
     private fun provideLoggingInterceptor(): HttpLoggingInterceptor = HttpLoggingInterceptor()
             .apply { level = HttpLoggingInterceptor.Level.BODY }
 
-    fun getWeather() = getApiService().getWeather()
+    fun getTask() = getApiService().getTask()
 
 }
