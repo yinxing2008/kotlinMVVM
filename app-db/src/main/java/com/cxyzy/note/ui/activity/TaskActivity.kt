@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import com.cxyzy.note.R
 import com.cxyzy.note.ext.obtainViewModel
 import com.cxyzy.note.ui.adapter.TaskAdapter
 import com.cxyzy.note.viewmodels.TaskViewModel
-import com.cxyzy.note.R
 import kotlinx.android.synthetic.main.activity_task.*
 
 class TaskActivity : AppCompatActivity() {

@@ -9,8 +9,8 @@ import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import com.cxyzy.note.db.bean.Task
 import com.cxyzy.note.db.dao.TaskDao
-import com.cxyzy.note.utils.DATABASE_NAME
 import com.cxyzy.note.db.test.DbTestDataInit
+import com.cxyzy.note.utils.DATABASE_NAME
 
 
 @Database(entities = [Task::class], version = 1, exportSchema = false)

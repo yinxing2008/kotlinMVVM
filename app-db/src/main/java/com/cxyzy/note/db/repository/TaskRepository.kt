@@ -5,6 +5,7 @@ import androidx.paging.toLiveData
 import com.cxyzy.note.db.bean.Task
 import com.cxyzy.note.db.dao.TaskDao
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 
 class TaskRepository private constructor(private val taskDao: TaskDao) {
