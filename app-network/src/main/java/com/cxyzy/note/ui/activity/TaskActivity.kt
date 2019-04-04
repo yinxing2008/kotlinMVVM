@@ -1,6 +1,5 @@
 package com.cxyzy.note.ui.activity
 
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer

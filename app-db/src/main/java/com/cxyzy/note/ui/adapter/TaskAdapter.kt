@@ -7,7 +7,6 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.cxyzy.note.R
-import com.cxyzy.note.network.bean.Task
 import kotlinx.android.synthetic.main.item_task.view.*
 
 class TaskAdapter : PagedListAdapter<com.cxyzy.note.network.bean.Task, TaskAdapter.ViewHolder>(DiffCallback()) {

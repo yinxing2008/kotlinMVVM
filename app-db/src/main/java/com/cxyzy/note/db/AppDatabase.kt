@@ -7,7 +7,6 @@ import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
-import com.cxyzy.note.network.bean.Task
 import com.cxyzy.note.db.dao.TaskDao
 import com.cxyzy.note.db.test.DbTestDataInit
 import com.cxyzy.note.utils.DATABASE_NAME

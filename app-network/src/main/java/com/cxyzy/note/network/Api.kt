@@ -1,6 +1,5 @@
 package com.tanzhiqiang.kmvvm.repository
 
-import androidx.paging.PagedList
 import com.cxyzy.note.network.bean.Task
 import kotlinx.coroutines.Deferred
 import retrofit2.http.GET

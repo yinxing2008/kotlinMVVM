@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.cxyzy.note.db.AppDatabase
-import com.cxyzy.note.network.bean.Task
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 

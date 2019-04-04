@@ -2,7 +2,6 @@ package com.cxyzy.note.viewmodels
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import androidx.paging.PagedList
 import com.cxyzy.note.network.bean.Task
 import com.tanzhiqiang.kmvvm.repository.HttpRepository
 import kotlinx.coroutines.Dispatchers

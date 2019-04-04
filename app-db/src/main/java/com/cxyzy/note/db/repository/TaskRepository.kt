@@ -2,7 +2,6 @@ package com.cxyzy.note.db.repository
 
 import androidx.paging.Config
 import androidx.paging.toLiveData
-import com.cxyzy.note.network.bean.Task
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
