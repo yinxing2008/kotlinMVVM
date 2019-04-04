@@ -1,40 +1,39 @@
 package com.cxyzy.note.ui.activity
 
-import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.cxyzy.note.R
-import com.cxyzy.note.ext.obtainViewModel
+import com.cxyzy.note.db.bean.Task
 import com.cxyzy.note.ui.adapter.TaskAdapter
 import com.cxyzy.note.viewmodels.TaskViewModel
 import kotlinx.android.synthetic.main.activity_task.*
 
-class TaskActivity : AppCompatActivity() {
+class TaskActivity : BaseActivity<TaskViewModel>() {
+    private val adapter = TaskAdapter()
+    override fun providerVMClass(): Class<TaskViewModel> = TaskViewModel::class.java
+    override fun layoutId(): Int = R.layout.activity_task
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_task)
-
-        val viewModel = obtainViewModel(TaskViewModel::class.java)
-        val adapter = TaskAdapter()
-        adapter.setOnItemClick { task ->
-            viewModel.delTask(task.id,
-                    {
-                        progressBar.visibility = View.VISIBLE
-                    },
-                    {
-                        progressBar.visibility = View.GONE
-                    })
-        }
+    override fun initView() {
         taskRv.adapter = adapter
-        viewModel.taskList.observe(this, Observer { adapter.submitList(it) })
+        adapter.setOnItemClick(this::onItemClick)
 
-        //设置下拉刷新转圈的颜色
-//        swipeRefreshLayout.setColorSchemeColors(Color.RED,Color.BLUE,Color.GREEN)
         swipeRefreshLayout.setOnRefreshListener {
             swipeRefreshLayout.isRefreshing = false
         }
+    }
+
+    private fun onItemClick(task: Task) {
+        mViewModel?.delTask(task.id,
+                {
+                    progressBar.visibility = View.VISIBLE
+                },
+                {
+                    progressBar.visibility = View.GONE
+                })
+    }
+
+    override fun startObserve() {
+        mViewModel?.taskList?.observe(this, Observer { adapter.submitList(it) })
     }
 
 }

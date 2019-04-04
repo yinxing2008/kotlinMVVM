@@ -15,7 +15,7 @@
         tools:ignore="GoogleAppIndexingWarning">
 
         <activity
-            android:name="com.cxyzy.note.ui.activity.MainActivity"
+            android:name="com.cxyzy.note.ui.activity.TaskActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

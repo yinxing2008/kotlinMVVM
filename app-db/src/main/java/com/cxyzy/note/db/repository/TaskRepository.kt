@@ -3,12 +3,11 @@ package com.cxyzy.note.db.repository
 import androidx.paging.Config
 import androidx.paging.toLiveData
 import com.cxyzy.note.db.bean.Task
-import com.cxyzy.note.db.dao.TaskDao
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 
-class TaskRepository private constructor(private val taskDao: TaskDao) {
+class TaskRepository : BaseRepository() {
+    private val taskDao = dbInstance.taskDao()
 
     fun getTaskList() = taskDao.getTaskList().toLiveData(Config(
             pageSize = 30,
@@ -32,10 +31,9 @@ class TaskRepository private constructor(private val taskDao: TaskDao) {
         @Volatile
         private var instance: TaskRepository? = null
 
-        fun getInstance(taskDao: TaskDao) =
+        fun getInstance() =
                 instance ?: synchronized(this) {
-                    instance
-                            ?: TaskRepository(taskDao).also { instance = it }
+                    instance ?: TaskRepository().also { instance = it }
                 }
     }
 }
