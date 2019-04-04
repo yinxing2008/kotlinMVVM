@@ -1,6 +1,7 @@
 package com.tanzhiqiang.kmvvm.repository
 
 import com.cxyzy.note.ext.CoroutineCallAdapterFactory
+import com.cxyzy.note.network.HttpLogInterceptor
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -18,7 +19,10 @@ object HttpRepository {
                 .create(Api::class.java)
     }
 
-    private fun provideOkHttpClient(interceptor: HttpLoggingInterceptor): OkHttpClient = OkHttpClient.Builder().apply { addInterceptor(interceptor) }.build()
+    private fun provideOkHttpClient(interceptor: HttpLoggingInterceptor): OkHttpClient = OkHttpClient.Builder().apply {
+        addInterceptor(interceptor)
+        addInterceptor(HttpLogInterceptor())
+    }.build()
 
     private fun provideLoggingInterceptor(): HttpLoggingInterceptor = HttpLoggingInterceptor()
             .apply { level = HttpLoggingInterceptor.Level.BODY }

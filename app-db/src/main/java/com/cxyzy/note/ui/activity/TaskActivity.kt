@@ -3,7 +3,7 @@ package com.cxyzy.note.ui.activity
 import android.view.View
 import androidx.lifecycle.Observer
 import com.cxyzy.note.R
-import com.cxyzy.note.db.bean.Task
+import com.cxyzy.note.network.bean.Task
 import com.cxyzy.note.ui.adapter.TaskAdapter
 import com.cxyzy.note.viewmodels.TaskViewModel
 import kotlinx.android.synthetic.main.activity_task.*
@@ -22,7 +22,7 @@ class TaskActivity : BaseActivity<TaskViewModel>() {
         }
     }
 
-    private fun onItemClick(task: Task) {
+    private fun onItemClick(task: com.cxyzy.note.network.bean.Task) {
         mViewModel?.delTask(task.id,
                 {
                     progressBar.visibility = View.VISIBLE

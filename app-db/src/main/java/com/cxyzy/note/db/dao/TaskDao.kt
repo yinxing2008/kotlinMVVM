@@ -5,19 +5,19 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
-import com.cxyzy.note.db.bean.Task
+import com.cxyzy.note.network.bean.Task
 
 @Dao
 interface TaskDao {
     @Query("SELECT * FROM Task")
-    fun getTaskList(): DataSource.Factory<Int, Task>
+    fun getTaskList(): DataSource.Factory<Int, com.cxyzy.note.network.bean.Task>
 
     @Insert
-    fun add(task: Task)
+    fun add(task: com.cxyzy.note.network.bean.Task)
 
     @Insert
-    fun add(tasks: List<Task>)
+    fun add(tasks: List<com.cxyzy.note.network.bean.Task>)
 
     @Delete
-    fun del(task: Task)
+    fun del(task: com.cxyzy.note.network.bean.Task)
 }

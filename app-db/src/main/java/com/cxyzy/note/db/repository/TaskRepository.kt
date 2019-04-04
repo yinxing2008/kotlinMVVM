@@ -2,7 +2,7 @@ package com.cxyzy.note.db.repository
 
 import androidx.paging.Config
 import androidx.paging.toLiveData
-import com.cxyzy.note.db.bean.Task
+import com.cxyzy.note.network.bean.Task
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -15,14 +15,14 @@ class TaskRepository : BaseRepository() {
 
     suspend fun add(name: String) {
         withContext(Dispatchers.IO) {
-            val task = Task(0, name)
+            val task = com.cxyzy.note.network.bean.Task(0, name)
             taskDao.add(task)
         }
     }
 
     suspend fun delTask(id: Int) {
         withContext(Dispatchers.IO) {
-            val task = Task(id, "")
+            val task = com.cxyzy.note.network.bean.Task(id, "")
             taskDao.del(task)
         }
     }

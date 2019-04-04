@@ -9,7 +9,6 @@ import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
 open class BaseViewModel : ViewModel(), LifecycleObserver, CoroutineScope {
-
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main
     private val mLaunchManager: MutableList<Job> = mutableListOf()
