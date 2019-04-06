@@ -7,10 +7,11 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.cxyzy.note.R
+import com.cxyzy.note.db.bean.Task
 import kotlinx.android.synthetic.main.item_task.view.*
 
-class TaskAdapter : PagedListAdapter<com.cxyzy.note.network.bean.Task, TaskAdapter.ViewHolder>(DiffCallback()) {
-    private lateinit var onItemClick: (task: com.cxyzy.note.network.bean.Task) -> Unit
+class TaskAdapter : PagedListAdapter<Task, TaskAdapter.ViewHolder>(DiffCallback()) {
+    private lateinit var onItemClick: (task: Task) -> Unit
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val data = getItem(position) ?: return
         holder.itemView.taskTv.text = data.name
@@ -22,19 +23,19 @@ class TaskAdapter : PagedListAdapter<com.cxyzy.note.network.bean.Task, TaskAdapt
         return ViewHolder(view)
     }
 
-    infix fun setOnItemClick(onClick: (task: com.cxyzy.note.network.bean.Task) -> Unit) {
+    infix fun setOnItemClick(onClick: (task: Task) -> Unit) {
         this.onItemClick = onClick
     }
 
     class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!)
 }
 
-private class DiffCallback : DiffUtil.ItemCallback<com.cxyzy.note.network.bean.Task>() {
-    override fun areContentsTheSame(oldItem: com.cxyzy.note.network.bean.Task, newItem: com.cxyzy.note.network.bean.Task): Boolean {
+private class DiffCallback : DiffUtil.ItemCallback<Task>() {
+    override fun areContentsTheSame(oldItem: Task, newItem: Task): Boolean {
         return oldItem.id == newItem.id
     }
 
-    override fun areItemsTheSame(oldItem: com.cxyzy.note.network.bean.Task, newItem: com.cxyzy.note.network.bean.Task): Boolean {
+    override fun areItemsTheSame(oldItem: Task, newItem: Task): Boolean {
         return oldItem == newItem
     }
 }
