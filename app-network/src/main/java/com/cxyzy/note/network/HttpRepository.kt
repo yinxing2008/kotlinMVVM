@@ -1,7 +1,6 @@
-package com.tanzhiqiang.kmvvm.repository
+package com.cxyzy.note.network
 
 import com.cxyzy.note.ext.CoroutineCallAdapterFactory
-import com.cxyzy.note.network.HttpLogInterceptor
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
