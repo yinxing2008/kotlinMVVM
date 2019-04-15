@@ -1,1 +1,1 @@
-include ':app-db',':app-network-nopaging',':app-network-paging'
+include ':app-db', ':app-retrofit-nopaging', ':app-retrofit-paging'
