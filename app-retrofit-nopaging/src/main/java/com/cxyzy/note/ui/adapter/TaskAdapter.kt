@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.item_task.view.*
 
 class TaskAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private lateinit var onItemClick: (task: Task) -> Unit
-    private var dataList = mutableListOf<Task>()
+    var dataList = listOf<Task>()
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val data = dataList[position]

@@ -1,7 +1,6 @@
 package com.cxyzy.note.ui.activity
 
 import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.cxyzy.note.R
 import com.cxyzy.note.network.bean.Task
@@ -42,8 +41,8 @@ class TaskActivity : BaseActivity<TaskViewModel>() {
 
     override fun startObserve() {
         mViewModel?.taskList?.observe(this, Observer {
-//            adapter.submitList(it)
-            Toast.makeText(this,"tasks count:"+it.size,Toast.LENGTH_LONG).show()
+            adapter.dataList= it
+            adapter.notifyDataSetChanged()
         })
     }
 
