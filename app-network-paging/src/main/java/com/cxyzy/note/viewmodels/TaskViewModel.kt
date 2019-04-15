@@ -31,8 +31,7 @@ class TaskViewModel : BaseViewModel() {
         launchOnUITryCatch(
                 {
                     start()
-                    val tasks = withContext(Dispatchers.IO) { HttpRepository.getTask() }
-                    taskList.value = tasks.await()
+                    taskList.value = HttpRepository.getTask()
                 }
                 ,
                 {
