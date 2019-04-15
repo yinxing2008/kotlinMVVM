@@ -1,1 +1,1 @@
-include ':app-db',':app-network'
+include ':app-db',':app-network-nopaging',':app-network-paging'
