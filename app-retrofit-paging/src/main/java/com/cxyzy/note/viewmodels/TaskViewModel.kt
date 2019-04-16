@@ -11,11 +11,11 @@ class TaskViewModel : BaseViewModel() {
     private val tag = TaskViewModel::class.java.simpleName
     lateinit var taskList: LiveData<PagedList<Task>>
 
-    fun delTask(id: Int, start: () -> Unit, finally: () -> Unit) {
+    fun getTaskDetail(id: Int, start: () -> Unit, finally: () -> Unit) {
         launchOnUITryCatch(
                 {
                     start()
-//                    taskRepository.delTask(id)
+                    //TODO: get task detail
                 },
                 {
                     Log.e(tag, "${it.message}")
@@ -28,7 +28,7 @@ class TaskViewModel : BaseViewModel() {
      * @param start 这个方法中可以显示加载进度条等
      * @param finally 可以隐藏进度条等
      */
-    fun getTaskFromNetwork(start: () -> Unit, finally: () -> Unit) {
+    fun getTask(start: () -> Unit, finally: () -> Unit) {
         launchOnUITryCatch(
                 {
                     start()

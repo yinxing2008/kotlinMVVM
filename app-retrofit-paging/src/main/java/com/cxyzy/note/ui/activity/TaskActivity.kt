@@ -20,20 +20,24 @@ class TaskActivity : BaseActivity<TaskViewModel>() {
         swipeRefreshLayout.setOnRefreshListener {
             swipeRefreshLayout.isRefreshing = false
         }
-        mViewModel?.getTaskFromNetwork(
+        mViewModel?.getTask(
                 {
-                    progressBar.visibility = View.VISIBLE
+                    showProgressBar(true)
                 },
                 {
                     mViewModel?.taskList?.observe(this, Observer {
                         adapter.submitList(it)
                     })
-                    progressBar.visibility = View.GONE
+                    showProgressBar(false)
                 })
     }
 
+    private fun showProgressBar(isShow: Boolean) {
+        progressBar.visibility = if (isShow) View.VISIBLE else View.GONE
+    }
+
     private fun onItemClick(task: Task) {
-        mViewModel?.delTask(task.id,
+        mViewModel?.getTaskDetail(task.id,
                 {
                     progressBar.visibility = View.VISIBLE
                 },
