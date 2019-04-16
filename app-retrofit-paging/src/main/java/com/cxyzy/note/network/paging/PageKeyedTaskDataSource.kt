@@ -16,12 +16,11 @@
 
 package com.cxyzy.note.network.paging
 
-import androidx.lifecycle.MutableLiveData
+import android.util.Log
 import androidx.paging.PageKeyedDataSource
 import com.cxyzy.note.network.Api
 import com.cxyzy.note.network.bean.Task
 import java.io.IOException
-import java.util.concurrent.Executor
 
 /**
  * A data source that uses the before/after keys returned in page requests.
@@ -30,37 +29,12 @@ import java.util.concurrent.Executor
  */
 class PageKeyedTaskDataSource(
         private val api: Api) : PageKeyedDataSource<Int, Task>() {
-
-    // keep a function reference for the retry event
-    private var retry: (() -> Any)? = null
-
-    /**
-     * There is no sync on the state because paging will always call loadInitial first then wait
-     * for it to return some success value before calling loadAfter.
-     */
-    val networkState = MutableLiveData<NetworkState>()
-
-    val initialLoad = MutableLiveData<NetworkState>()
-
-//    fun retryAllFailed() {
-//        val prevRetry = retry
-//        retry = null
-//        prevRetry?.let {
-//            retryExecutor.execute {
-//                it.invoke()
-//            }
-//        }
-//    }
+    private val tag = PageKeyedTaskDataSource::class.java.simpleName
 
     override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, Task>) {
     }
 
     private fun callAPI(page: Int, perPage: Int, callback: (repos: List<Task>, next: Int?) -> Unit) {
-
-        networkState.postValue(NetworkState.RUNNING)
-
-        var state = NetworkState.FAILED
-
         try {
             val response = api.getTaskAsync(page, perPage).execute()
 
@@ -74,13 +48,10 @@ class PageKeyedTaskDataSource(
                 }
 
                 callback(it, next)
-                state = NetworkState.SUCCESS
             }
         } catch (e: IOException) {
+            Log.e(tag, e.message)
         }
-
-        // 結果を通知
-        networkState.postValue(state)
     }
 
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, Task>) {

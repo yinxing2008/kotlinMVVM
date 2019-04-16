@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.paging.PagedList
 import com.cxyzy.note.network.HttpRepository
 import com.cxyzy.note.network.bean.Task
+import kotlinx.coroutines.delay
 
 class TaskViewModel : BaseViewModel() {
     private val tag = TaskViewModel::class.java.simpleName
