@@ -1,15 +1,12 @@
 package com.cxyzy.note.viewmodels
 
 import android.util.Log
-import androidx.lifecycle.MutableLiveData
-import com.cxyzy.note.network.bean.Task
 import com.cxyzy.note.network.HttpRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import com.cxyzy.note.network.bean.Repo
 
 class TaskViewModel : BaseViewModel() {
     private val tag = TaskViewModel::class.java.simpleName
-    val taskList: MutableLiveData<List<Task>> = MutableLiveData()
+    lateinit var taskList: List<Repo>
 
     fun delTask(id: Int, start: () -> Unit, finally: () -> Unit) {
         launchOnUITryCatch(
@@ -23,6 +20,7 @@ class TaskViewModel : BaseViewModel() {
                 { finally() },
                 true)
     }
+
     /**
      * @param start 这个方法中可以显示加载进度条等
      * @param finally 可以隐藏进度条等
@@ -31,7 +29,7 @@ class TaskViewModel : BaseViewModel() {
         launchOnUITryCatch(
                 {
                     start()
-                    taskList.value = HttpRepository.getTask()
+                    taskList = HttpRepository.getTask().await()
                 }
                 ,
                 {
