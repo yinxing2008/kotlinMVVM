@@ -6,7 +6,7 @@ import com.cxyzy.note.network.bean.Repo
 
 class RepoDataSourceFactory(
         api: Api) : DataSource.Factory<Int, Repo>() {
-    private val source = PageKeyedRepoDataSource(api)
+    private val source = RepoPageKeyedDataSource(api)
 
     override fun create(): DataSource<Int, Repo> {
         return source

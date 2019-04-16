@@ -6,9 +6,9 @@ import com.cxyzy.note.network.Api
 import com.cxyzy.note.network.bean.Repo
 import java.io.IOException
 
-class PageKeyedRepoDataSource(
+class RepoPageKeyedDataSource(
         private val api: Api) : PageKeyedDataSource<Int, Repo>() {
-    private val tag = PageKeyedRepoDataSource::class.java.simpleName
+    private val tag = RepoPageKeyedDataSource::class.java.simpleName
 
     override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, Repo>) {
     }
