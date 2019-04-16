@@ -28,7 +28,7 @@ import java.util.concurrent.Executor
  * <p>
  * See ItemKeyedSubredditDataSource
  */
-class PageKeyedSubredditDataSource(
+class PageKeyedTaskDataSource(
         private val api: Api) : PageKeyedDataSource<Int, Task>() {
 
     // keep a function reference for the retry event

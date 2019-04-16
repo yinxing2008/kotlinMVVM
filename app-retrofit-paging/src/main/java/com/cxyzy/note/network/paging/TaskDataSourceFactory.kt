@@ -25,9 +25,9 @@ import com.cxyzy.note.network.bean.Task
  * This allows us to channel its network request status etc back to the UI. See the Listing creation
  * in the Repository class.
  */
-class SubRedditDataSourceFactory(
+class TaskDataSourceFactory(
         private val api: Api) : DataSource.Factory<Int, Task>() {
-    val source = PageKeyedSubredditDataSource(api)
+    val source = PageKeyedTaskDataSource(api)
 
     override fun create(): DataSource<Int, Task> {
         return source

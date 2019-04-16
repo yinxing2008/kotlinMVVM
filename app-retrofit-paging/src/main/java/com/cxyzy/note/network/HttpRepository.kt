@@ -6,7 +6,7 @@ import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.cxyzy.note.ext.CoroutineCallAdapterFactory
 import com.cxyzy.note.network.bean.Task
-import com.cxyzy.note.network.paging.SubRedditDataSourceFactory
+import com.cxyzy.note.network.paging.TaskDataSourceFactory
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -36,7 +36,7 @@ object HttpRepository {
     fun getTask(): LiveData<PagedList<Task>> {
 
         val api = getApiService()
-        val factory = SubRedditDataSourceFactory(api)
+        val factory = TaskDataSourceFactory(api)
         val config = PagedList.Config.Builder()
                 .setInitialLoadSizeHint(PAGE_SIZE)
                 .setPageSize(PAGE_SIZE)
