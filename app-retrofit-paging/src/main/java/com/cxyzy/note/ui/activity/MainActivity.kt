@@ -3,29 +3,29 @@ package com.cxyzy.note.ui.activity
 import android.view.View
 import androidx.lifecycle.Observer
 import com.cxyzy.note.R
-import com.cxyzy.note.network.bean.Task
-import com.cxyzy.note.ui.adapter.TaskAdapter
-import com.cxyzy.note.viewmodels.TaskViewModel
-import kotlinx.android.synthetic.main.activity_task.*
+import com.cxyzy.note.network.bean.Repo
+import com.cxyzy.note.ui.adapter.RepoAdapter
+import com.cxyzy.note.viewmodels.RepoViewModel
+import kotlinx.android.synthetic.main.activity_repo.*
 
-class TaskActivity : BaseActivity<TaskViewModel>() {
-    private val adapter = TaskAdapter()
-    override fun providerVMClass(): Class<TaskViewModel> = TaskViewModel::class.java
-    override fun layoutId(): Int = R.layout.activity_task
+class MainActivity : BaseActivity<RepoViewModel>() {
+    private val adapter = RepoAdapter()
+    override fun providerVMClass(): Class<RepoViewModel> = RepoViewModel::class.java
+    override fun layoutId(): Int = R.layout.activity_repo
 
     override fun initView() {
-        taskRv.adapter = adapter
+        rv.adapter = adapter
         adapter.setOnItemClick(this::onItemClick)
 
         swipeRefreshLayout.setOnRefreshListener {
             swipeRefreshLayout.isRefreshing = false
         }
-        mViewModel?.getTask(
+        mViewModel?.getRepo(
                 {
                     showProgressBar(true)
                 },
                 {
-                    mViewModel?.taskList?.observe(this, Observer {
+                    mViewModel?.repoList?.observe(this, Observer {
                         adapter.submitList(it)
                     })
                     showProgressBar(false)
@@ -36,8 +36,8 @@ class TaskActivity : BaseActivity<TaskViewModel>() {
         progressBar.visibility = if (isShow) View.VISIBLE else View.GONE
     }
 
-    private fun onItemClick(task: Task) {
-        mViewModel?.getTaskDetail(task.id,
+    private fun onItemClick(repo: Repo) {
+        mViewModel?.getRepoDetail(repo.id,
                 {
                     progressBar.visibility = View.VISIBLE
                 },

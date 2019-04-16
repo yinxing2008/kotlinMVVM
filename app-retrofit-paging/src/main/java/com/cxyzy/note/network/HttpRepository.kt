@@ -5,8 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.cxyzy.note.ext.CoroutineCallAdapterFactory
-import com.cxyzy.note.network.bean.Task
-import com.cxyzy.note.network.paging.TaskDataSourceFactory
+import com.cxyzy.note.network.bean.Repo
+import com.cxyzy.note.network.paging.DataSourceFactory
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -16,7 +16,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object HttpRepository {
     private fun getApiService(): Api {
         return Retrofit.Builder()
-                .baseUrl("https://raw.githubusercontent.com/")
+                .baseUrl("https://api.github.com")
                 .addCallAdapterFactory(CoroutineCallAdapterFactory())
                 .client(provideOkHttpClient(provideLoggingInterceptor()))
                 .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
@@ -33,10 +33,10 @@ object HttpRepository {
             .apply { level = HttpLoggingInterceptor.Level.BODY }
 
 
-    fun getTask(): LiveData<PagedList<Task>> {
+    fun getRepo(): LiveData<PagedList<Repo>> {
 
         val api = getApiService()
-        val factory = TaskDataSourceFactory(api)
+        val factory = DataSourceFactory(api)
         val config = PagedList.Config.Builder()
                 .setInitialLoadSizeHint(PAGE_SIZE)
                 .setPageSize(PAGE_SIZE)

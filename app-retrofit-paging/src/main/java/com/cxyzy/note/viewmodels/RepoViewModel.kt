@@ -4,18 +4,17 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.paging.PagedList
 import com.cxyzy.note.network.HttpRepository
-import com.cxyzy.note.network.bean.Task
-import kotlinx.coroutines.delay
+import com.cxyzy.note.network.bean.Repo
 
-class TaskViewModel : BaseViewModel() {
-    private val tag = TaskViewModel::class.java.simpleName
-    lateinit var taskList: LiveData<PagedList<Task>>
+class RepoViewModel : BaseViewModel() {
+    private val tag = RepoViewModel::class.java.simpleName
+    lateinit var repoList: LiveData<PagedList<Repo>>
 
-    fun getTaskDetail(id: Int, start: () -> Unit, finally: () -> Unit) {
+    fun getRepoDetail(id: String, start: () -> Unit, finally: () -> Unit) {
         launchOnUITryCatch(
                 {
                     start()
-                    //TODO: get task detail
+                    //TODO: get Repo detail
                 },
                 {
                     Log.e(tag, "${it.message}")
@@ -28,11 +27,11 @@ class TaskViewModel : BaseViewModel() {
      * @param start 这个方法中可以显示加载进度条等
      * @param finally 可以隐藏进度条等
      */
-    fun getTask(start: () -> Unit, finally: () -> Unit) {
+    fun getRepo(start: () -> Unit, finally: () -> Unit) {
         launchOnUITryCatch(
                 {
                     start()
-                    taskList = HttpRepository.getTask()
+                    repoList = HttpRepository.getRepo()
                 },
                 {
                     Log.e(tag, "${it.message}")
