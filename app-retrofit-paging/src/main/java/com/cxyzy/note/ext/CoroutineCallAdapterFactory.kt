@@ -8,7 +8,8 @@ import java.lang.reflect.Type
 
 class CoroutineCallAdapterFactory private constructor() : CallAdapter.Factory() {
     companion object {
-        @JvmStatic @JvmName("create")
+        @JvmStatic
+        @JvmName("create")
         operator fun invoke() = CoroutineCallAdapterFactory()
     }
 
