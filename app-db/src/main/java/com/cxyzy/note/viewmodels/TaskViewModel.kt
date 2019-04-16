@@ -2,9 +2,9 @@ package com.cxyzy.note.viewmodels
 
 import android.util.Log
 import com.cxyzy.note.db.repository.TaskRepository
+import timber.log.Timber
 
 class TaskViewModel : BaseViewModel() {
-    private val tag = TaskViewModel::class.java.simpleName
     private val taskRepository = TaskRepository.getInstance()
     val taskList = taskRepository.getTaskList()
 
@@ -15,7 +15,7 @@ class TaskViewModel : BaseViewModel() {
                     taskRepository.delTask(id)
                 },
                 {
-                    Log.e(tag, "${it.message}")
+                    Timber.e(it)
                 },
                 { finally() },
                 true)

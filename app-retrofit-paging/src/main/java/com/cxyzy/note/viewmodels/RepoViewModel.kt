@@ -5,9 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.paging.PagedList
 import com.cxyzy.note.network.HttpRepository
 import com.cxyzy.note.network.bean.Repo
+import timber.log.Timber
 
 class RepoViewModel : BaseViewModel() {
-    private val tag = RepoViewModel::class.java.simpleName
     lateinit var repoList: LiveData<PagedList<Repo>>
 
     fun getRepoDetail(id: String, start: () -> Unit, finally: () -> Unit) {
@@ -17,7 +17,7 @@ class RepoViewModel : BaseViewModel() {
                     //TODO: get Repo detail
                 },
                 {
-                    Log.e(tag, "${it.message}")
+                    Timber.e(it)
                 },
                 { finally() },
                 true)
@@ -35,7 +35,7 @@ class RepoViewModel : BaseViewModel() {
                 },
                 {
                     catchBlock(it)
-                    Log.e(tag, "${it.message}")
+                    Timber.e(it)
                 },
                 { finallyBlock() },
                 true)

@@ -14,6 +14,10 @@ class App : Application() {
         super.onCreate()
         context = this
 
+        initLog()
+    }
+
+    private fun initLog() {
         if (BuildConfig.DEBUG) {
             Timber.plant(DebugTree())
         }

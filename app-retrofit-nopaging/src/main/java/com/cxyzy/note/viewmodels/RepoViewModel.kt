@@ -7,7 +7,6 @@ import com.cxyzy.note.network.bean.Repo
 import timber.log.Timber
 
 class RepoViewModel : BaseViewModel() {
-    private val tag = RepoViewModel::class.java.simpleName
     var taskList: MutableLiveData<List<Repo>> = MutableLiveData()
 
     fun getRepoDetail(id: String, start: () -> Unit, finally: () -> Unit) {
@@ -17,7 +16,7 @@ class RepoViewModel : BaseViewModel() {
 //                    taskRepository.getRepoDetail(id)
                 },
                 {
-                    Log.e(tag, "${it.message}")
+                    Timber.e(it)
                 },
                 { finally() },
                 true)

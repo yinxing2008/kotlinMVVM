@@ -4,11 +4,11 @@ import android.util.Log
 import androidx.paging.PageKeyedDataSource
 import com.cxyzy.note.network.Api
 import com.cxyzy.note.network.bean.Repo
+import timber.log.Timber
 import java.io.IOException
 
 class RepoPageKeyedDataSource(
         private val api: Api) : PageKeyedDataSource<Int, Repo>() {
-    private val tag = RepoPageKeyedDataSource::class.java.simpleName
 
     override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, Repo>) {
     }
@@ -29,7 +29,7 @@ class RepoPageKeyedDataSource(
                 callback(it, next)
             }
         } catch (e: IOException) {
-            Log.e(tag, e.message)
+            Timber.e(e)
         }
     }
 

@@ -8,7 +8,7 @@ import com.cxyzy.note.ui.adapter.TaskAdapter
 import com.cxyzy.note.viewmodels.TaskViewModel
 import kotlinx.android.synthetic.main.activity_task.*
 
-class TaskActivity : BaseActivity<TaskViewModel>() {
+class RepoActivity : BaseActivity<TaskViewModel>() {
     private val adapter = TaskAdapter()
     override fun providerVMClass(): Class<TaskViewModel> = TaskViewModel::class.java
     override fun layoutId(): Int = R.layout.activity_task
