@@ -5,21 +5,23 @@ import androidx.lifecycle.LiveData
 import androidx.paging.PagedList
 import com.cxyzy.note.network.HttpRepository
 import com.cxyzy.note.network.bean.Repo
+import kotlinx.coroutines.NonCancellable.start
 import timber.log.Timber
 
 class RepoViewModel : BaseViewModel() {
     lateinit var repoList: LiveData<PagedList<Repo>>
 
-    fun getRepoDetail(id: String, start: () -> Unit, finally: () -> Unit) {
+    fun getRepoDetail(id: String,tryBlock: () -> Unit, catchBlock: (throwable: Throwable) -> Unit, finallyBlock: () -> Unit) {
         launchOnUITryCatch(
                 {
-                    start()
+                    tryBlock()
                     //TODO: get Repo detail
                 },
                 {
+                    catchBlock(it)
                     Timber.e(it)
                 },
-                { finally() },
+                { finallyBlock() },
                 true)
     }
 

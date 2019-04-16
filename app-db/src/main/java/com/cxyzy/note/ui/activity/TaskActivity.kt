@@ -1,14 +1,16 @@
 package com.cxyzy.note.ui.activity
 
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.cxyzy.note.R
 import com.cxyzy.note.db.bean.Task
 import com.cxyzy.note.ui.adapter.TaskAdapter
 import com.cxyzy.note.viewmodels.TaskViewModel
 import kotlinx.android.synthetic.main.activity_task.*
+import org.jetbrains.anko.toast
 
-class RepoActivity : BaseActivity<TaskViewModel>() {
+class TaskActivity : BaseActivity<TaskViewModel>() {
     private val adapter = TaskAdapter()
     override fun providerVMClass(): Class<TaskViewModel> = TaskViewModel::class.java
     override fun layoutId(): Int = R.layout.activity_task
@@ -26,6 +28,9 @@ class RepoActivity : BaseActivity<TaskViewModel>() {
         mViewModel?.delTask(task.id,
                 {
                     progressBar.visibility = View.VISIBLE
+                },
+                {
+                    toast(it.message.toString())
                 },
                 {
                     progressBar.visibility = View.GONE

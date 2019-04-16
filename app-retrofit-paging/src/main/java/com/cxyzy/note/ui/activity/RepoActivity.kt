@@ -8,6 +8,7 @@ import com.cxyzy.note.network.bean.Repo
 import com.cxyzy.note.ui.adapter.RepoAdapter
 import com.cxyzy.note.viewmodels.RepoViewModel
 import kotlinx.android.synthetic.main.activity_repo.*
+import org.jetbrains.anko.toast
 
 class RepoActivity : BaseActivity<RepoViewModel>() {
     private val adapter = RepoAdapter()
@@ -26,7 +27,7 @@ class RepoActivity : BaseActivity<RepoViewModel>() {
                     showProgressBar(true)
                 },
                 {
-                    Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+                    toast(it.message.toString())
                 },
                 {
                     mViewModel?.repoList?.observe(this, Observer {
@@ -44,6 +45,9 @@ class RepoActivity : BaseActivity<RepoViewModel>() {
         mViewModel?.getRepoDetail(repo.id,
                 {
                     progressBar.visibility = View.VISIBLE
+                },
+                {
+                    toast(it.message.toString())
                 },
                 {
                     progressBar.visibility = View.GONE

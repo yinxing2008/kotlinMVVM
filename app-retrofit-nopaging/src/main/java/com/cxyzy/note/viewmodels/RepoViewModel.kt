@@ -4,21 +4,23 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.cxyzy.note.network.HttpRepository
 import com.cxyzy.note.network.bean.Repo
+import kotlinx.coroutines.NonCancellable.start
 import timber.log.Timber
 
 class RepoViewModel : BaseViewModel() {
     var taskList: MutableLiveData<List<Repo>> = MutableLiveData()
 
-    fun getRepoDetail(id: String, start: () -> Unit, finally: () -> Unit) {
+    fun getRepoDetail(id: String, tryBlock: () -> Unit, catchBlock: (throwable: Throwable) -> Unit, finallyBlock: () -> Unit) {
         launchOnUITryCatch(
                 {
-                    start()
-//                    taskRepository.getRepoDetail(id)
+                    tryBlock()
+                    //TODO: get Repo detail
                 },
                 {
+                    catchBlock(it)
                     Timber.e(it)
                 },
-                { finally() },
+                { finallyBlock() },
                 true)
     }
 
@@ -26,16 +28,17 @@ class RepoViewModel : BaseViewModel() {
      * @param start 这个方法中可以显示加载进度条等
      * @param finally 可以隐藏进度条等
      */
-    fun getRepo(start: () -> Unit, finally: () -> Unit) {
+    fun getRepo(tryBlock: () -> Unit, catchBlock: (throwable: Throwable) -> Unit, finallyBlock: () -> Unit) {
         launchOnUITryCatch(
                 {
-                    start()
+                    tryBlock()
                     taskList.value = HttpRepository.getRepo()
                 },
                 {
+                    catchBlock(it)
                     Timber.e(it)
                 },
-                { finally() },
+                { finallyBlock() },
                 true)
 
     }
