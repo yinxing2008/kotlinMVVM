@@ -1,6 +1,7 @@
 package com.cxyzy.note.ui.activity
 
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.cxyzy.note.R
 import com.cxyzy.note.network.bean.Repo
@@ -23,6 +24,9 @@ class MainActivity : BaseActivity<RepoViewModel>() {
         mViewModel?.getRepo(
                 {
                     showProgressBar(true)
+                },
+                {
+                    Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
                 },
                 {
                     mViewModel?.repoList?.observe(this, Observer {
