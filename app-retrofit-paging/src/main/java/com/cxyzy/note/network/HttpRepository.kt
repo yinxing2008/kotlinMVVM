@@ -17,8 +17,8 @@ object HttpRepository {
     private fun getApiService(): Api {
         return Retrofit.Builder()
                 .baseUrl("https://raw.githubusercontent.com/")
-                .addCallAdapterFactory(CoroutineCallAdapterFactory())
-                .client(provideOkHttpClient(provideLoggingInterceptor()))
+//                .addCallAdapterFactory(CoroutineCallAdapterFactory())
+//                .client(provideOkHttpClient(provideLoggingInterceptor()))
                 .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
                 .build()
                 .create(Api::class.java)

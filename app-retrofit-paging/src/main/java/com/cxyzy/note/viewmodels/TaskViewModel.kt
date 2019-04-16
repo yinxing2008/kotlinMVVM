@@ -2,14 +2,13 @@ package com.cxyzy.note.viewmodels
 
 import android.util.Log
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagedList
 import com.cxyzy.note.network.HttpRepository
 import com.cxyzy.note.network.bean.Task
 
 class TaskViewModel : BaseViewModel() {
     private val tag = TaskViewModel::class.java.simpleName
-    var taskList: LiveData<PagedList<Task>> = MutableLiveData()
+    lateinit var taskList: LiveData<PagedList<Task>>
 
     fun delTask(id: Int, start: () -> Unit, finally: () -> Unit) {
         launchOnUITryCatch(
@@ -18,7 +17,7 @@ class TaskViewModel : BaseViewModel() {
 //                    taskRepository.delTask(id)
                 },
                 {
-                    Log.i(tag, "${it.message}")
+                    Log.e(tag, "${it.message}")
                 },
                 { finally() },
                 true)
@@ -33,11 +32,11 @@ class TaskViewModel : BaseViewModel() {
                 {
                     start()
                     taskList = HttpRepository.getTask()
-                }
-                ,
+                },
                 {
-                    Log.i(tag, "${it.message}")
-                }, { finally() }, true)
-
+                    Log.e(tag, "${it.message}")
+                },
+                { finally() },
+                true)
     }
 }

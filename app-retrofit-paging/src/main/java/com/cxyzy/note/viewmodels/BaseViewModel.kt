@@ -13,12 +13,12 @@ open class BaseViewModel : ViewModel(), LifecycleObserver, CoroutineScope {
     private val mLaunchManager: MutableList<Job> = mutableListOf()
 
     protected fun launchOnUITryCatch(tryBlock: suspend CoroutineScope.() -> Unit,
-                                     cacheBlock: suspend CoroutineScope.(Throwable) -> Unit,
+                                     catchBlock: suspend CoroutineScope.(Throwable) -> Unit,
                                      finallyBlock: suspend CoroutineScope.() -> Unit,
                                      handleCancellationExceptionManually: Boolean
     ) {
         launchOnUI {
-            tryCatch(tryBlock, cacheBlock, finallyBlock, handleCancellationExceptionManually)
+            tryCatch(tryBlock, catchBlock, finallyBlock, handleCancellationExceptionManually)
         }
     }
 
