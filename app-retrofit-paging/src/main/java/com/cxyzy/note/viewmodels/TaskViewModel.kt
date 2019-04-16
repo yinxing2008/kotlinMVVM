@@ -1,15 +1,15 @@
 package com.cxyzy.note.viewmodels
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.cxyzy.note.network.bean.Task
+import androidx.paging.PagedList
 import com.cxyzy.note.network.HttpRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import com.cxyzy.note.network.bean.Task
 
 class TaskViewModel : BaseViewModel() {
-
-    val taskList: MutableLiveData<List<Task>> = MutableLiveData()
+    private val tag = TaskViewModel::class.java.simpleName
+    var taskList: LiveData<PagedList<Task>> = MutableLiveData()
 
     fun delTask(id: Int, start: () -> Unit, finally: () -> Unit) {
         launchOnUITryCatch(
@@ -18,11 +18,12 @@ class TaskViewModel : BaseViewModel() {
 //                    taskRepository.delTask(id)
                 },
                 {
-                    Log.i("tt", "${it.message}")
+                    Log.i(tag, "${it.message}")
                 },
                 { finally() },
                 true)
     }
+
     /**
      * @param start 这个方法中可以显示加载进度条等
      * @param finally 可以隐藏进度条等
@@ -31,11 +32,11 @@ class TaskViewModel : BaseViewModel() {
         launchOnUITryCatch(
                 {
                     start()
-                    taskList.value = HttpRepository.getTask()
+                    taskList = HttpRepository.getTask()
                 }
                 ,
                 {
-                    Log.i("tt", "${it.message}")
+                    Log.i(tag, "${it.message}")
                 }, { finally() }, true)
 
     }

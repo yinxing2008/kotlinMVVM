@@ -1,6 +1,12 @@
 package com.cxyzy.note.network
 
+import android.nfc.tech.MifareUltralight.PAGE_SIZE
+import androidx.lifecycle.LiveData
+import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
 import com.cxyzy.note.ext.CoroutineCallAdapterFactory
+import com.cxyzy.note.network.bean.Task
+import com.cxyzy.note.network.paging.SubRedditDataSourceFactory
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -26,6 +32,18 @@ object HttpRepository {
     private fun provideLoggingInterceptor(): HttpLoggingInterceptor = HttpLoggingInterceptor()
             .apply { level = HttpLoggingInterceptor.Level.BODY }
 
-    suspend fun getTask() = getApiService().getTaskAsync().await()
+
+    fun getTask(): LiveData<PagedList<Task>> {
+
+        val api = getApiService()
+        val factory = SubRedditDataSourceFactory(api)
+        val config = PagedList.Config.Builder()
+                .setInitialLoadSizeHint(PAGE_SIZE)
+                .setPageSize(PAGE_SIZE)
+                .build()
+
+        return LivePagedListBuilder(factory, config).build()
+
+    }
 
 }

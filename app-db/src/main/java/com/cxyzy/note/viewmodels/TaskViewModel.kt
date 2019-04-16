@@ -4,7 +4,7 @@ import android.util.Log
 import com.cxyzy.note.db.repository.TaskRepository
 
 class TaskViewModel : BaseViewModel() {
-
+    private val tag = TaskViewModel::class.java.simpleName
     private val taskRepository = TaskRepository.getInstance()
     val taskList = taskRepository.getTaskList()
 
@@ -15,7 +15,7 @@ class TaskViewModel : BaseViewModel() {
                     taskRepository.delTask(id)
                 },
                 {
-                    Log.i("tt", "${it.message}")
+                    Log.i(tag, "${it.message}")
                 },
                 { finally() },
                 true)

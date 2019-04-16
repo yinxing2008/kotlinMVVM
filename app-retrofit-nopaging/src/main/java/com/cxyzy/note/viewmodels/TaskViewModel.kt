@@ -8,7 +8,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class TaskViewModel : BaseViewModel() {
-
+    private val tag = TaskViewModel::class.java.simpleName
     val taskList: MutableLiveData<List<Task>> = MutableLiveData()
 
     fun delTask(id: Int, start: () -> Unit, finally: () -> Unit) {
@@ -18,7 +18,7 @@ class TaskViewModel : BaseViewModel() {
 //                    taskRepository.delTask(id)
                 },
                 {
-                    Log.i("tt", "${it.message}")
+                    Log.i(tag, "${it.message}")
                 },
                 { finally() },
                 true)
@@ -35,7 +35,7 @@ class TaskViewModel : BaseViewModel() {
                 }
                 ,
                 {
-                    Log.i("tt", "${it.message}")
+                    Log.i(tag, "${it.message}")
                 }, { finally() }, true)
 
     }

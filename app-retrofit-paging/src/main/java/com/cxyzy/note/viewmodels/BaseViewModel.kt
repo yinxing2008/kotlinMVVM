@@ -1,6 +1,5 @@
 package com.cxyzy.note.viewmodels
 
-import android.util.Log
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
@@ -54,7 +53,6 @@ open class BaseViewModel : ViewModel(), LifecycleObserver, CoroutineScope {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     fun onDestory() {
-        Log.i("tt", "onDestory")
         clearLaunchTask()
     }
 
