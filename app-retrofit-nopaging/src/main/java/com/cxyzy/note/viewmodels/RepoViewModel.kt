@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.cxyzy.note.network.HttpRepository
 import com.cxyzy.note.network.bean.Repo
+import timber.log.Timber
 
 class RepoViewModel : BaseViewModel() {
     private val tag = RepoViewModel::class.java.simpleName
@@ -30,10 +31,10 @@ class RepoViewModel : BaseViewModel() {
         launchOnUITryCatch(
                 {
                     start()
-                    taskList.value = HttpRepository.getTask()
+                    taskList.value = HttpRepository.getRepo()
                 },
                 {
-                    Log.e(tag, "${it.message}")
+                    Timber.e(it)
                 },
                 { finally() },
                 true)
