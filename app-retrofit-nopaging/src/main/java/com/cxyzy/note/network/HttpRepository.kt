@@ -3,5 +3,5 @@ package com.cxyzy.note.network
 import com.cxyzy.note.utils.PAGE_SIZE
 
 object HttpRepository : BaseHttpRepository() {
-    fun getTask() = api.repos(user = "cxyzy1", perPage = 1, page = PAGE_SIZE)
+    suspend fun getTask() = api.repos(user = "cxyzy1", perPage = 1, page = PAGE_SIZE).await()
 }

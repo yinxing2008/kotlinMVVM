@@ -14,7 +14,7 @@ class RepoAdapter : PagedListAdapter<Repo, RepoAdapter.ViewHolder>(DiffCallback(
     private lateinit var onItemClick: (task: Repo) -> Unit
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val data = getItem(position) ?: return
-        holder.itemView.taskTv.text = data.fullName
+        holder.itemView.textView.text = data.fullName
         holder.itemView.setOnClickListener { onItemClick(data) }
     }
 

@@ -5,18 +5,11 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/taskTv"
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="任务" />
+        tools:text="desc" />
 
-    <TextView
-        android:id="@+id/delTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text='删除'
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

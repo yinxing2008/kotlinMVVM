@@ -15,7 +15,7 @@
         tools:ignore="GoogleAppIndexingWarning">
 
         <activity
-            android:name="com.cxyzy.note.ui.activity.MainActivity">
+            android:name="com.cxyzy.note.ui.activity.RepoActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

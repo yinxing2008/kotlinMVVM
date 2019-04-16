@@ -3,31 +3,29 @@ package com.cxyzy.note.ui.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.paging.PagedListAdapter
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.cxyzy.note.R
-import com.cxyzy.note.network.bean.Task
-import kotlinx.android.synthetic.main.item_task.view.*
+import com.cxyzy.note.network.bean.Repo
+import kotlinx.android.synthetic.main.item_repo.view.*
 
-class TaskAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private lateinit var onItemClick: (task: Task) -> Unit
-    var dataList = listOf<Task>()
+class RepoAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    private lateinit var onItemClick: (Repo: Repo) -> Unit
+    var dataList = mutableListOf<Repo>()
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val data = dataList[position]
-        holder.itemView.taskTv.text = data.name
+        holder.itemView.textView.text = data.fullName
         holder.itemView.setOnClickListener { onItemClick(data) }
     }
 
     override fun getItemCount(): Int = dataList.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_task, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_repo, parent, false)
         return ViewHolder(view)
     }
 
-    infix fun setOnItemClick(onClick: (task: Task) -> Unit) {
+    infix fun setOnItemClick(onClick: (Repo: Repo) -> Unit) {
         this.onItemClick = onClick
     }
 

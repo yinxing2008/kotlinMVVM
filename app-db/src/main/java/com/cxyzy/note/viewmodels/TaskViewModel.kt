@@ -15,7 +15,7 @@ class TaskViewModel : BaseViewModel() {
                     taskRepository.delTask(id)
                 },
                 {
-                    Log.i(tag, "${it.message}")
+                    Log.e(tag, "${it.message}")
                 },
                 { finally() },
                 true)

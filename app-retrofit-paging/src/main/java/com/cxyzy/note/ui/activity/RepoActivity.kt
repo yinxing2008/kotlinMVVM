@@ -9,7 +9,7 @@ import com.cxyzy.note.ui.adapter.RepoAdapter
 import com.cxyzy.note.viewmodels.RepoViewModel
 import kotlinx.android.synthetic.main.activity_repo.*
 
-class MainActivity : BaseActivity<RepoViewModel>() {
+class RepoActivity : BaseActivity<RepoViewModel>() {
     private val adapter = RepoAdapter()
     override fun providerVMClass(): Class<RepoViewModel> = RepoViewModel::class.java
     override fun layoutId(): Int = R.layout.activity_repo
