@@ -11,7 +11,7 @@ import com.cxyzy.demo.network.bean.Repo
 import kotlinx.android.synthetic.main.item_repo.view.*
 
 class RepoAdapter : PagedListAdapter<Repo, RepoAdapter.ViewHolder>(DiffCallback()) {
-    private lateinit var onItemClick: (task: Repo) -> Unit
+    private lateinit var onItemClick: (repo: Repo) -> Unit
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val data = getItem(position) ?: return
         holder.itemView.textView.text = data.fullName
@@ -23,7 +23,7 @@ class RepoAdapter : PagedListAdapter<Repo, RepoAdapter.ViewHolder>(DiffCallback(
         return ViewHolder(view)
     }
 
-    infix fun setOnItemClick(onClick: (task: Repo) -> Unit) {
+    infix fun setOnItemClick(onClick: (repo: Repo) -> Unit) {
         this.onItemClick = onClick
     }
 

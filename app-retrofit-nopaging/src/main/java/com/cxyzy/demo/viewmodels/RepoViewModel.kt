@@ -6,7 +6,7 @@ import com.cxyzy.demo.network.bean.Repo
 import timber.log.Timber
 
 class RepoViewModel : BaseViewModel() {
-    var taskList: MutableLiveData<List<Repo>> = MutableLiveData()
+    var repoList: MutableLiveData<List<Repo>> = MutableLiveData()
 
     fun getRepoDetail(id: String, tryBlock: () -> Unit, catchBlock: (throwable: Throwable) -> Unit, finallyBlock: () -> Unit) {
         launchOnUITryCatch(
@@ -30,7 +30,7 @@ class RepoViewModel : BaseViewModel() {
         launchOnUITryCatch(
                 {
                     tryBlock()
-                    taskList.value = HttpRepository.getRepo()
+                    repoList.value = HttpRepository.getRepo()
                 },
                 {
                     catchBlock(it)

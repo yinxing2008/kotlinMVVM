@@ -15,7 +15,7 @@ class RepoActivity : BaseActivity<RepoViewModel>() {
     override fun layoutId(): Int = R.layout.activity_repo
 
     override fun initView() {
-        taskRv.adapter = adapter
+        rv.adapter = adapter
         adapter.setOnItemClick(this::onItemClick)
 
         swipeRefreshLayout.setOnRefreshListener {
@@ -30,7 +30,7 @@ class RepoActivity : BaseActivity<RepoViewModel>() {
                 },
                 {
                     progressBar.visibility = View.GONE
-                    mViewModel?.taskList?.observe(this, Observer {
+                    mViewModel?.repoList?.observe(this, Observer {
                         adapter.dataList.addAll(it)
                         adapter.notifyDataSetChanged()
                     })
