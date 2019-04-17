@@ -23,8 +23,9 @@ class RepoViewModel : BaseViewModel() {
     }
 
     /**
-     * @param start 这个方法中可以显示加载进度条等
-     * @param finally 可以隐藏进度条等
+     * @param tryBlock 主要执行代码块
+     * @param catchBlock 异常处理代码块
+     * @param finallyBlock 无论是否异常都执行的代码块
      */
     fun getRepo(tryBlock: () -> Unit, catchBlock: (throwable: Throwable) -> Unit, finallyBlock: () -> Unit) {
         launchOnUITryCatch(
