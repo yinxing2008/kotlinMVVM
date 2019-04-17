@@ -32,23 +32,24 @@ open class BaseViewModel : ViewModel(), LifecycleObserver, CoroutineScope {
 
     }
 
-    private suspend fun CoroutineScope.tryCatch(
+    private suspend fun tryCatch(
             tryBlock: suspend CoroutineScope.() -> Unit,
             catchBlock: suspend CoroutineScope.(Throwable) -> Unit,
             finallyBlock: suspend CoroutineScope.() -> Unit,
             handleCancellationExceptionManually: Boolean = false) {
-        try {
-            tryBlock()
-        } catch (e: Throwable) {
-            if (e !is CancellationException || handleCancellationExceptionManually) {
-                catchBlock(e)
-            } else {
-                throw e
+        coroutineScope {
+            try {
+                tryBlock()
+            } catch (e: Throwable) {
+                if (e !is CancellationException || handleCancellationExceptionManually) {
+                    catchBlock(e)
+                } else {
+                    throw e
+                }
+            } finally {
+                finallyBlock()
             }
-        } finally {
-            finallyBlock()
         }
-
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
