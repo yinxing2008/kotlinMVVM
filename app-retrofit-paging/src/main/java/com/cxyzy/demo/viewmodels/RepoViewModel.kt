@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.paging.PagedList
 import com.cxyzy.demo.network.HttpRepository
 import com.cxyzy.demo.network.bean.Repo
+import com.cxyzy.demo.utils.logger.loge
 import timber.log.Timber
 
 class RepoViewModel : BaseViewModel() {
@@ -17,7 +18,7 @@ class RepoViewModel : BaseViewModel() {
                 },
                 {
                     catchBlock(it)
-                    Timber.e(it)
+                    loge(it)
                 },
                 { finallyBlock() },
                 true)
@@ -36,7 +37,7 @@ class RepoViewModel : BaseViewModel() {
                 },
                 {
                     catchBlock(it)
-                    Timber.e(it)
+                    loge(it)
                 },
                 { finallyBlock() },
                 true)
