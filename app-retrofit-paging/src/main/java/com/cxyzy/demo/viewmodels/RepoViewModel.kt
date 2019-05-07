@@ -31,8 +31,8 @@ class RepoViewModel : BaseViewModel() {
     fun getRepo(onSuccess: () -> Unit, onError: (throwable: Throwable) -> Unit, onFinish: () -> Unit) {
         launchOnUITryCatch(
                 {
-                    onSuccess()
                     repoList = HttpRepository.getRepo()
+                    onSuccess()
                 },
                 {
                     onError(it)

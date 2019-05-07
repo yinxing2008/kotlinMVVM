@@ -21,9 +21,11 @@ class RepoActivity : BaseActivity<RepoViewModel>() {
         swipeRefreshLayout.setOnRefreshListener {
             swipeRefreshLayout.isRefreshing = false
         }
+
+        showProgressBar(true)
         mViewModel?.getRepo(
                 {
-                    showProgressBar(true)
+                    toast("queried success.")
                 },
                 {
                     toast(it.message.toString())
@@ -43,6 +45,7 @@ class RepoActivity : BaseActivity<RepoViewModel>() {
     private fun onItemClick(repo: Repo) {
         mViewModel?.getRepoDetail(repo.id,
                 {
+                    toast("detail fetched.")
                     progressBar.visibility = View.VISIBLE
                 },
                 {
