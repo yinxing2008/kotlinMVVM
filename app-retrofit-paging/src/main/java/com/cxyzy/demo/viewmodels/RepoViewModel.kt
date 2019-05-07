@@ -5,41 +5,40 @@ import androidx.paging.PagedList
 import com.cxyzy.demo.network.HttpRepository
 import com.cxyzy.demo.network.bean.Repo
 import com.cxyzy.demo.utils.logger.loge
-import timber.log.Timber
 
 class RepoViewModel : BaseViewModel() {
     lateinit var repoList: LiveData<PagedList<Repo>>
 
-    fun getRepoDetail(id: String,tryBlock: () -> Unit, catchBlock: (throwable: Throwable) -> Unit, finallyBlock: () -> Unit) {
+    fun getRepoDetail(id: String, onSuccess: () -> Unit, onError: (throwable: Throwable) -> Unit, onFinish: () -> Unit) {
         launchOnUITryCatch(
                 {
-                    tryBlock()
+                    onSuccess()
                     //TODO: get Repo detail
                 },
                 {
-                    catchBlock(it)
+                    onError(it)
                     loge(it)
                 },
-                { finallyBlock() },
+                { onFinish() },
                 true)
     }
 
     /**
-     * @param tryBlock 主要执行代码块
-     * @param catchBlock 异常处理代码块
-     * @param finallyBlock 无论是否异常都执行的代码块
+     * @param onSuccess 主要执行代码块
+     * @param onError 异常处理代码块
+     * @param onFinish 无论是否异常都执行的代码块
      */
-    fun getRepo(tryBlock: () -> Unit, catchBlock: (throwable: Throwable) -> Unit, finallyBlock: () -> Unit) {
+    fun getRepo(onSuccess: () -> Unit, onError: (throwable: Throwable) -> Unit, onFinish: () -> Unit) {
         launchOnUITryCatch(
                 {
-                    tryBlock()
+                    onSuccess()
                     repoList = HttpRepository.getRepo()
                 },
                 {
-                    catchBlock(it)
+                    onError(it)
                     loge(it)
                 },
-                { finallyBlock() },
+                { onFinish() },
                 true)
     }
 }
