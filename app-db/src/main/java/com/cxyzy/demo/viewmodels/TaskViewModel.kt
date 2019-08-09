@@ -1,7 +1,6 @@
 package com.cxyzy.demo.viewmodels
 
 import com.cxyzy.demo.db.repository.TaskRepository
-import timber.log.Timber
 
 class TaskViewModel : BaseViewModel() {
     private val taskRepository = TaskRepository.getInstance()
@@ -15,7 +14,7 @@ class TaskViewModel : BaseViewModel() {
                 },
                 {
                     catchBlock(it)
-                    Timber.e(it)
+                    error(it)
                 },
                 { finallyBlock() },
                 true)

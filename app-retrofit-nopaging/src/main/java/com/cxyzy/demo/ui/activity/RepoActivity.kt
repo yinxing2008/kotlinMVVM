@@ -6,8 +6,8 @@ import com.cxyzy.demo.R
 import com.cxyzy.demo.network.bean.Repo
 import com.cxyzy.demo.ui.adapter.RepoAdapter
 import com.cxyzy.demo.viewmodels.RepoViewModel
+import com.cxyzy.utils.ext.toast
 import kotlinx.android.synthetic.main.activity_repo.*
-import org.jetbrains.anko.toast
 
 class RepoActivity : BaseActivity<RepoViewModel>() {
     private val adapter = RepoAdapter()

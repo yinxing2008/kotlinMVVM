@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.paging.PagedList
 import com.cxyzy.demo.network.HttpRepository
 import com.cxyzy.demo.network.bean.Repo
-import com.cxyzy.demo.utils.logger.loge
 
 class RepoViewModel : BaseViewModel() {
     lateinit var repoList: LiveData<PagedList<Repo>>
@@ -17,7 +16,7 @@ class RepoViewModel : BaseViewModel() {
                 },
                 {
                     onError(it)
-                    loge(it)
+                    error(it)
                 },
                 { onFinish() },
                 true)
@@ -36,7 +35,7 @@ class RepoViewModel : BaseViewModel() {
                 },
                 {
                     onError(it)
-                    loge(it)
+                    error(it)
                 },
                 { onFinish() },
                 true)

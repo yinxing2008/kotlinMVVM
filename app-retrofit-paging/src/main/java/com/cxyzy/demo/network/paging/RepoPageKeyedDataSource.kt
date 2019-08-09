@@ -3,11 +3,11 @@ package com.cxyzy.demo.network.paging
 import androidx.paging.PageKeyedDataSource
 import com.cxyzy.demo.network.Api
 import com.cxyzy.demo.network.bean.Repo
-import timber.log.Timber
+import com.cxyzy.utils.LogUtils
 import java.io.IOException
 
 class RepoPageKeyedDataSource(
-        private val api: Api) : PageKeyedDataSource<Int, Repo>() {
+        private val api: Api) : PageKeyedDataSource<Int, Repo>(), LogUtils {
 
     override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, Repo>) {
     }
@@ -28,7 +28,7 @@ class RepoPageKeyedDataSource(
                 callback(it, next)
             }
         } catch (e: IOException) {
-            Timber.e(e)
+            error(e)
         }
     }
 

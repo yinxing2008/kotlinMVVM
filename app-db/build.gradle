@@ -43,7 +43,5 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
     implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.loggingInterceptorVersion"
     implementation "com.squareup.okhttp3:okhttp:$rootProject.okhttpVersion"
-
-    implementation "com.jakewharton.timber:timber:$rootProject.timberVersion"
-    implementation "org.jetbrains.anko:anko-commons:$rootProject.ankoVersion"
+    implementation "com.github.cxyzy1:kotlinUtils:$rootProject.kotlinUtilsVersion"
 }

@@ -3,7 +3,6 @@ package com.cxyzy.demo.viewmodels
 import androidx.lifecycle.MutableLiveData
 import com.cxyzy.demo.network.HttpRepository
 import com.cxyzy.demo.network.bean.Repo
-import timber.log.Timber
 
 class RepoViewModel : BaseViewModel() {
     var repoList: MutableLiveData<List<Repo>> = MutableLiveData()
@@ -16,7 +15,7 @@ class RepoViewModel : BaseViewModel() {
                 },
                 {
                     catchBlock(it)
-                    Timber.e(it)
+                    error(it)
                 },
                 { finallyBlock() },
                 true)
@@ -35,7 +34,7 @@ class RepoViewModel : BaseViewModel() {
                 },
                 {
                     catchBlock(it)
-                    Timber.e(it)
+                    error(it)
                 },
                 { finallyBlock() },
                 true)
