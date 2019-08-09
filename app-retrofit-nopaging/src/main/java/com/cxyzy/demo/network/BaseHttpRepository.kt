@@ -1,30 +1,22 @@
-package com.cxyzy.demo.network
+package com.cxyzy.note.network
 
-import com.cxyzy.demo.ext.CoroutineCallAdapterFactory
-import com.cxyzy.demo.network.interceptor.HttpLogInterceptor
+import com.cxyzy.demo.ext.KoinInject
+import com.cxyzy.demo.network.Api
+import com.cxyzy.demo.utils.OkHttpUrl.BASE_URL
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 open class BaseHttpRepository {
     val api: Api by lazy {
+        val okHttpClient = KoinInject.getFromKoin<OkHttpClient>()
         Retrofit.Builder()
-                .baseUrl("https://api.github.com")
-                .client(provideOkHttpClient(provideLoggingInterceptor()))
-                .addCallAdapterFactory(CoroutineCallAdapterFactory())
+                .baseUrl(BASE_URL)
+                .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
                 .build()
                 .create(Api::class.java)
     }
-
-    private fun provideOkHttpClient(interceptor: HttpLoggingInterceptor): OkHttpClient = OkHttpClient.Builder().apply {
-        addInterceptor(interceptor)
-        addInterceptor(HttpLogInterceptor())
-    }.build()
-
-    private fun provideLoggingInterceptor(): HttpLoggingInterceptor = HttpLoggingInterceptor()
-            .apply { level = HttpLoggingInterceptor.Level.BODY }
 
 }

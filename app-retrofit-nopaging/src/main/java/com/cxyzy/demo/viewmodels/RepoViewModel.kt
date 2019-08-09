@@ -1,17 +1,19 @@
 package com.cxyzy.demo.viewmodels
 
 import androidx.lifecycle.MutableLiveData
+import com.cxyzy.demo.ext.KoinInject.getFromKoin
 import com.cxyzy.demo.network.HttpRepository
-import com.cxyzy.demo.network.bean.Repo
+import com.cxyzy.demo.network.response.RepoResp
 
 class RepoViewModel : BaseViewModel() {
-    var repoList: MutableLiveData<List<Repo>> = MutableLiveData()
+    val httpRepository = getFromKoin<HttpRepository>()
+    var repoList: MutableLiveData<List<RepoResp>> = MutableLiveData()
 
     fun getRepoDetail(id: String, tryBlock: () -> Unit, catchBlock: (throwable: Throwable) -> Unit, finallyBlock: () -> Unit) {
         launchOnUITryCatch(
                 {
                     tryBlock()
-                    //TODO: get Repo detail
+                    //TODO: get RepoResp detail
                 },
                 {
                     catchBlock(it)
@@ -30,7 +32,7 @@ class RepoViewModel : BaseViewModel() {
         launchOnUITryCatch(
                 {
                     tryBlock()
-                    repoList.value = HttpRepository.getRepo()
+                    repoList.value = httpRepository.getRepo()
                 },
                 {
                     catchBlock(it)

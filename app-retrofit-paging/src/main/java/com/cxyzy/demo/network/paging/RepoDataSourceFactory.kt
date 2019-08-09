@@ -2,7 +2,7 @@ package com.cxyzy.demo.network.paging
 
 import androidx.paging.DataSource
 import com.cxyzy.demo.network.Api
-import com.cxyzy.demo.network.bean.Repo
+import com.cxyzy.demo.network.response.Repo
 
 class RepoDataSourceFactory(
         api: Api) : DataSource.Factory<Int, Repo>() {

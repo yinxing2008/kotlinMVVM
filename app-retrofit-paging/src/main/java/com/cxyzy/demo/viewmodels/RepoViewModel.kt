@@ -3,7 +3,7 @@ package com.cxyzy.demo.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.paging.PagedList
 import com.cxyzy.demo.network.HttpRepository
-import com.cxyzy.demo.network.bean.Repo
+import com.cxyzy.demo.network.response.Repo
 
 class RepoViewModel : BaseViewModel() {
     lateinit var repoList: LiveData<PagedList<Repo>>

@@ -1,4 +1,4 @@
-package com.cxyzy.demo.network.bean
+package com.cxyzy.demo.network.response
 
 import com.google.gson.annotations.SerializedName
 

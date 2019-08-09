@@ -7,7 +7,7 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.cxyzy.demo.R
-import com.cxyzy.demo.network.bean.Repo
+import com.cxyzy.demo.network.response.Repo
 import kotlinx.android.synthetic.main.item_repo.view.*
 
 class RepoAdapter : PagedListAdapter<Repo, RepoAdapter.ViewHolder>(DiffCallback()) {

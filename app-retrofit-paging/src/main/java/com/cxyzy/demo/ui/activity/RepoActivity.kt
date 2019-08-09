@@ -3,7 +3,7 @@ package com.cxyzy.demo.ui.activity
 import android.view.View
 import androidx.lifecycle.Observer
 import com.cxyzy.demo.R
-import com.cxyzy.demo.network.bean.Repo
+import com.cxyzy.demo.network.response.Repo
 import com.cxyzy.demo.ui.adapter.RepoAdapter
 import com.cxyzy.demo.viewmodels.RepoViewModel
 import com.cxyzy.utils.ext.toast

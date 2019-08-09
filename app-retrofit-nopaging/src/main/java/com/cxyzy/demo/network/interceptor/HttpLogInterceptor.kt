@@ -1,24 +1,22 @@
-package com.cxyzy.demo.network.interceptor
+package com.cxyzy.note.network.interceptor
 
 import android.util.Log
 import okhttp3.Interceptor
 import okhttp3.Response
 import okio.Buffer
-import java.io.IOException
 import java.nio.charset.Charset
 import java.nio.charset.UnsupportedCharsetException
 import java.util.concurrent.TimeUnit
 
 /**
- * okhttp 拦截器
+ * okhttp log 拦截器
  */
 
-class HttpLogInterceptor : Interceptor {
+class HttpLogInterceptor : BaseInterceptor() {
     private val TAG = HttpLogInterceptor::class.java.simpleName
     private val UTF8 = Charset.forName("UTF-8")
 
-    @Throws(IOException::class)
-    override fun intercept(chain: Interceptor.Chain): Response {
+    override fun interceptMe(chain: Interceptor.Chain): Response {
         val request = chain.request()
         val requestBody = request.body()
         var body: String? = null

@@ -5,12 +5,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.cxyzy.demo.R
-import com.cxyzy.demo.network.bean.Repo
+import com.cxyzy.demo.network.response.RepoResp
 import kotlinx.android.synthetic.main.item_repo.view.*
 
 class RepoAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private lateinit var onItemClick: (Repo: Repo) -> Unit
-    var dataList = mutableListOf<Repo>()
+    private lateinit var onItemClick: (Repo: RepoResp) -> Unit
+    var dataList = mutableListOf<RepoResp>()
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val data = dataList[position]
@@ -25,7 +25,7 @@ class RepoAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         return ViewHolder(view)
     }
 
-    infix fun setOnItemClick(onClick: (Repo: Repo) -> Unit) {
+    infix fun setOnItemClick(onClick: (Repo: RepoResp) -> Unit) {
         this.onItemClick = onClick
     }
 
