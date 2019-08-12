@@ -3,20 +3,24 @@ package com.cxyzy.demo.ui.activity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.lifecycle.ViewModelProviders
 import com.cxyzy.demo.viewmodels.BaseViewModel
+import org.greenrobot.eventbus.EventBus
 
 abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
 
-    protected var mViewModel: VM? = null
+    protected abstract fun viewModel(): VM
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(layoutId())
-        initVM()
+        observeVM()
         prepareBeforeInitView()
         setToolbar()
-        initView()
+        initViews()
+        initListeners()
         startObserve()
+        if (isRegisterEventBus()) {
+            EventBus.getDefault().register(this)
+        }
     }
 
     private fun setToolbar() {
@@ -29,14 +33,12 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
     abstract fun layoutId(): Int
 
     open fun prepareBeforeInitView() {}
-    open fun initView() {}
+    open fun initViews() {}
+    open fun initListeners() {}
     open fun startObserve() {}
 
-    private fun initVM() {
-        providerVMClass()?.let { it ->
-            mViewModel = ViewModelProviders.of(this).get(it)
-            lifecycle.addObserver(mViewModel!!)
-        }
+    private fun observeVM() {
+        lifecycle.addObserver(viewModel())
     }
 
     /**
@@ -44,17 +46,18 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
      */
     open fun providerToolBar(): Toolbar? = null
 
-    /**
-     * [BaseViewModel]的实现类
-     */
-    open fun providerVMClass(): Class<VM>? = null
-
 
     override fun onDestroy() {
-        mViewModel?.let {
+        viewModel().let {
             lifecycle.removeObserver(it)
         }
-
+        if (isRegisterEventBus()) {
+            EventBus.getDefault().unregister(this)
+        }
         super.onDestroy()
+    }
+
+    protected open fun isRegisterEventBus(): Boolean {
+        return false
     }
 }

@@ -2,17 +2,17 @@ package com.cxyzy.demo.network.paging
 
 import androidx.paging.PageKeyedDataSource
 import com.cxyzy.demo.network.Api
-import com.cxyzy.demo.network.response.Repo
+import com.cxyzy.demo.network.response.RepoResp
 import com.cxyzy.utils.LogUtils
 import java.io.IOException
 
 class RepoPageKeyedDataSource(
-        private val api: Api) : PageKeyedDataSource<Int, Repo>(), LogUtils {
+        private val api: Api) : PageKeyedDataSource<Int, RepoResp>(), LogUtils {
 
-    override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, Repo>) {
+    override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, RepoResp>) {
     }
 
-    private fun callAPI(page: Int, perPage: Int, callback: (repos: List<Repo>, next: Int?) -> Unit) {
+    private fun callAPI(page: Int, perPage: Int, callback: (repos: List<RepoResp>, next: Int?) -> Unit) {
         try {
             val response = api.repos("cxyzy1", page, perPage).execute()
 
@@ -32,13 +32,13 @@ class RepoPageKeyedDataSource(
         }
     }
 
-    override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, Repo>) {
+    override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, RepoResp>) {
         callAPI(params.key, params.requestedLoadSize) { repos, next ->
             callback.onResult(repos, next)
         }
     }
 
-    override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, Repo>) {
+    override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, RepoResp>) {
         callAPI(1, params.requestedLoadSize) { repos, next ->
             callback.onResult(repos, null, next)
         }

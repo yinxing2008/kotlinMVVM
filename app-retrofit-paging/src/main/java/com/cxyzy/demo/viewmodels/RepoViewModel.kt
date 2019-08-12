@@ -2,42 +2,45 @@ package com.cxyzy.demo.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.paging.PagedList
+import com.cxyzy.demo.ext.KoinInject.getFromKoin
 import com.cxyzy.demo.network.HttpRepository
-import com.cxyzy.demo.network.response.Repo
+import com.cxyzy.demo.network.response.RepoResp
 
 class RepoViewModel : BaseViewModel() {
-    lateinit var repoList: LiveData<PagedList<Repo>>
+    val httpRepository = getFromKoin<HttpRepository>()
+    lateinit var repoList: LiveData<PagedList<RepoResp>>
 
-    fun getRepoDetail(id: String, onSuccess: () -> Unit, onError: (throwable: Throwable) -> Unit, onFinish: () -> Unit) {
+    fun getRepoDetail(id: String, tryBlock: () -> Unit, catchBlock: (throwable: Throwable) -> Unit, finallyBlock: () -> Unit) {
         launchOnUITryCatch(
                 {
-                    onSuccess()
-                    //TODO: get Repo detail
+                    tryBlock()
+                    //TODO: get RepoResp detail
                 },
                 {
-                    onError(it)
+                    catchBlock(it)
                     error(it)
                 },
-                { onFinish() },
+                { finallyBlock() },
                 true)
     }
 
     /**
-     * @param onSuccess 主要执行代码块
-     * @param onError 异常处理代码块
-     * @param onFinish 无论是否异常都执行的代码块
+     * @param tryBlock 主要执行代码块
+     * @param catchBlock 异常处理代码块
+     * @param finallyBlock 无论是否异常都执行的代码块
      */
-    fun getRepo(onSuccess: () -> Unit, onError: (throwable: Throwable) -> Unit, onFinish: () -> Unit) {
+    fun getRepo(tryBlock: () -> Unit, catchBlock: (throwable: Throwable) -> Unit, finallyBlock: () -> Unit) {
         launchOnUITryCatch(
                 {
-                    repoList = HttpRepository.getRepo()
-                    onSuccess()
+                    tryBlock()
+                    repoList = httpRepository.getRepo()
                 },
                 {
-                    onError(it)
+                    catchBlock(it)
                     error(it)
                 },
-                { onFinish() },
+                { finallyBlock() },
                 true)
+
     }
 }

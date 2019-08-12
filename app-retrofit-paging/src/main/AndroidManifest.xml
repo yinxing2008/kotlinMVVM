@@ -14,8 +14,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
 
-        <activity
-            android:name="com.cxyzy.demo.ui.activity.RepoActivity">
+        <activity android:name="com.cxyzy.demo.ui.activity.RepoActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

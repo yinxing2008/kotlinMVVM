@@ -8,7 +8,7 @@ import com.cxyzy.utils.LogUtils
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
-open class BaseViewModel : ViewModel(), LifecycleObserver, CoroutineScope,LogUtils {
+open class BaseViewModel : ViewModel(), LifecycleObserver, CoroutineScope, LogUtils {
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main
     private val mLaunchManager: MutableList<Job> = mutableListOf()

@@ -1,7 +1,6 @@
-package com.cxyzy.note.network
+package com.cxyzy.demo.network
 
 import com.cxyzy.demo.ext.KoinInject
-import com.cxyzy.demo.network.Api
 import com.cxyzy.demo.utils.OkHttpUrl.BASE_URL
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
@@ -18,5 +17,4 @@ open class BaseHttpRepository {
                 .build()
                 .create(Api::class.java)
     }
-
 }

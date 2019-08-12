@@ -1,4 +1,4 @@
-package com.cxyzy.note.network.interceptor
+package com.cxyzy.demo.network.interceptor
 
 import android.util.Log
 import okhttp3.Interceptor

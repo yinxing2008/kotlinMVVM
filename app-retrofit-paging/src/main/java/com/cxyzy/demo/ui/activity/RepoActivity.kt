@@ -3,47 +3,43 @@ package com.cxyzy.demo.ui.activity
 import android.view.View
 import androidx.lifecycle.Observer
 import com.cxyzy.demo.R
-import com.cxyzy.demo.network.response.Repo
+import com.cxyzy.demo.network.response.RepoResp
 import com.cxyzy.demo.ui.adapter.RepoAdapter
 import com.cxyzy.demo.viewmodels.RepoViewModel
 import com.cxyzy.utils.ext.toast
 import kotlinx.android.synthetic.main.activity_repo.*
+import org.koin.android.viewmodel.ext.android.getViewModel
 
 class RepoActivity : BaseActivity<RepoViewModel>() {
     private val adapter = RepoAdapter()
-    override fun providerVMClass(): Class<RepoViewModel> = RepoViewModel::class.java
+    override fun viewModel(): RepoViewModel = getViewModel()
+
     override fun layoutId(): Int = R.layout.activity_repo
 
-    override fun initView() {
+    override fun initViews() {
         rv.adapter = adapter
         adapter.setOnItemClick(this::onItemClick)
 
         swipeRefreshLayout.setOnRefreshListener {
             swipeRefreshLayout.isRefreshing = false
         }
-
-        showProgressBar(true)
-        mViewModel?.getRepo(
+        viewModel().getRepo(
                 {
-                    toast("queried success.")
+                    progressBar.visibility = View.VISIBLE
                 },
                 {
                     toast(it.message.toString())
                 },
                 {
-                    mViewModel?.repoList?.observe(this, Observer {
+                    progressBar.visibility = View.GONE
+                    viewModel().repoList?.observe(this, Observer {
                         adapter.submitList(it)
                     })
-                    showProgressBar(false)
                 })
     }
 
-    private fun showProgressBar(isShow: Boolean) {
-        progressBar.visibility = if (isShow) View.VISIBLE else View.GONE
-    }
-
-    private fun onItemClick(repo: Repo) {
-        mViewModel?.getRepoDetail(repo.id,
+    private fun onItemClick(repo: RepoResp) {
+        viewModel().getRepoDetail(repo.id,
                 {
                     toast("detail fetched.")
                     progressBar.visibility = View.VISIBLE
@@ -57,6 +53,7 @@ class RepoActivity : BaseActivity<RepoViewModel>() {
     }
 
     override fun startObserve() {
+
     }
 
 }
