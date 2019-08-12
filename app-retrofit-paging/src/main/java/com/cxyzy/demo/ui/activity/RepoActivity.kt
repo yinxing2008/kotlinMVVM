@@ -31,11 +31,12 @@ class RepoActivity : BaseActivity<RepoViewModel>() {
                     toast(it.message.toString())
                 },
                 {
-                    progressBar.visibility = View.GONE
-                    viewModel().repoList?.observe(this, Observer {
+                    viewModel().repoList.observe(this, Observer {
                         adapter.submitList(it)
+                        progressBar.visibility = View.GONE
                     })
                 })
+
     }
 
     private fun onItemClick(repo: RepoResp) {
