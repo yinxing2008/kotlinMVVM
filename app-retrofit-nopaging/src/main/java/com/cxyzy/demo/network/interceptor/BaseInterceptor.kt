@@ -14,7 +14,7 @@ abstract class BaseInterceptor : Interceptor {
 
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
-        var request = chain.request()
+        val request = chain.request()
         return if (shouldIntercept(request)) {
             interceptMe(chain)
         } else {

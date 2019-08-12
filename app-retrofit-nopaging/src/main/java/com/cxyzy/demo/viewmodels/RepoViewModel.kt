@@ -6,7 +6,7 @@ import com.cxyzy.demo.network.HttpRepository
 import com.cxyzy.demo.network.response.RepoResp
 
 class RepoViewModel : BaseViewModel() {
-    val httpRepository = getFromKoin<HttpRepository>()
+    private val httpRepository = getFromKoin<HttpRepository>()
     var repoList: MutableLiveData<List<RepoResp>> = MutableLiveData()
 
     fun getRepoDetail(id: String, tryBlock: () -> Unit, catchBlock: (throwable: Throwable) -> Unit, finallyBlock: () -> Unit) {

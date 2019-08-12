@@ -32,7 +32,7 @@ class RepoActivity : BaseActivity<RepoViewModel>() {
                 },
                 {
                     progressBar.visibility = View.GONE
-                    viewModel().repoList?.observe(this, Observer {
+                    viewModel().repoList.observe(this, Observer {
                         adapter.dataList.addAll(it)
                         adapter.notifyDataSetChanged()
                     })

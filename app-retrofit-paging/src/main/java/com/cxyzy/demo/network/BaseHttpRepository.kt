@@ -29,12 +29,4 @@ open class BaseHttpRepository {
                 .build()
     }
 
-    private fun provideOkHttpClient(interceptor: HttpLoggingInterceptor): OkHttpClient = OkHttpClient.Builder().apply {
-        addInterceptor(interceptor)
-        addInterceptor(HttpLogInterceptor())
-    }.build()
-
-    private fun provideLoggingInterceptor(): HttpLoggingInterceptor = HttpLoggingInterceptor()
-            .apply { level = HttpLoggingInterceptor.Level.BODY }
-
 }

@@ -3,12 +3,13 @@ package com.cxyzy.demo.db.repository
 import androidx.paging.Config
 import androidx.paging.toLiveData
 import com.cxyzy.demo.db.bean.Task
+import com.cxyzy.demo.db.dao.TaskDao
+import com.cxyzy.demo.ext.KoinInject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class TaskRepository : BaseRepository() {
-    private val taskDao = dbInstance.taskDao()
-
+    private val taskDao = KoinInject.getFromKoin<TaskDao>()
     fun getTaskList() = taskDao.getTaskList().toLiveData(Config(
             pageSize = 30,
             enablePlaceholders = true))

@@ -96,7 +96,7 @@ class HttpsUtil {
                 val keyStore = KeyStore.getInstance(KeyStore.getDefaultType())
                 keyStore.load(null)
                 for ((index, certificate) in certificates.withIndex()) {
-                    val certificateAlias = Integer.toString(index)
+                    val certificateAlias = index.toString()
                     keyStore.setCertificateEntry(certificateAlias, certificateFactory.generateCertificate(certificate))
                     try {
                         certificate.close()

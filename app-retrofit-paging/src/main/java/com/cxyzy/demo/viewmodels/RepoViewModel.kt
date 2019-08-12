@@ -8,7 +8,7 @@ import com.cxyzy.demo.network.HttpRepository
 import com.cxyzy.demo.network.response.RepoResp
 
 class RepoViewModel : BaseViewModel() {
-    val httpRepository = getFromKoin<HttpRepository>()
+    private val httpRepository = getFromKoin<HttpRepository>()
 //    lateinit var repoList: LiveData<PagedList<RepoResp>>
 
     var repoList: LiveData<PagedList<RepoResp>> = MutableLiveData()
