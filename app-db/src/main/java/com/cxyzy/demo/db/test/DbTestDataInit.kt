@@ -17,7 +17,7 @@ class DbTestDataInit(
 
     override suspend fun doWork(): Result = coroutineScope {
 
-        val database = AppDatabase.getInstance(applicationContext)
+        val database = AppDatabase.getInstance()
 
         val mList = mutableListOf<Task>()
 

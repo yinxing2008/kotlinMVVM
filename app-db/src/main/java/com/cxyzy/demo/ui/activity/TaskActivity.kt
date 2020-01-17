@@ -8,12 +8,11 @@ import com.cxyzy.demo.ui.adapter.TaskAdapter
 import com.cxyzy.demo.viewmodels.TaskViewModel
 import com.cxyzy.utils.ext.toast
 import kotlinx.android.synthetic.main.activity_task.*
-import org.koin.android.viewmodel.ext.android.getViewModel
 
 class TaskActivity : BaseActivity<TaskViewModel>() {
     private val adapter = TaskAdapter()
 
-    override fun viewModel(): TaskViewModel = getViewModel()
+    override fun viewModel() = TaskViewModel
     override fun layoutId(): Int = R.layout.activity_task
 
     override fun initViews() {

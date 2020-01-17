@@ -24,7 +24,6 @@ dependencies {
     kapt "androidx.room:room-compiler:$rootProject.roomVersion"
     implementation "androidx.paging:paging-runtime-ktx:$rootProject.pagingVersion"
 
-
     implementation "com.github.bumptech.glide:glide:$rootProject.glideVersion"
     kapt "com.github.bumptech.glide:compiler:$rootProject.glideVersion"
     implementation "android.arch.work:work-runtime-ktx:$rootProject.workVersion"
@@ -50,8 +49,4 @@ dependencies {
 
     implementation "com.github.cxyzy1:kotlinUtils:$rootProject.kotlinUtilsVersion"
 
-    //Koin
-    implementation "org.koin:koin-android:$rootProject.koinVersion"
-    implementation "org.koin:koin-android-scope:$rootProject.koinVersion"
-    implementation "org.koin:koin-android-viewmodel:$rootProject.koinVersion"
 }

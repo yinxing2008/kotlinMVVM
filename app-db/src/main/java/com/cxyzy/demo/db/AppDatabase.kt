@@ -7,6 +7,7 @@ import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
+import com.cxyzy.demo.App
 import com.cxyzy.demo.db.bean.Task
 import com.cxyzy.demo.db.dao.TaskDao
 import com.cxyzy.demo.db.test.DbTestDataInit
@@ -24,9 +25,9 @@ abstract class AppDatabase : RoomDatabase() {
         @Volatile
         private var instance: AppDatabase? = null
 
-        fun getInstance(context: Context): AppDatabase {
+        fun getInstance(): AppDatabase {
             return instance ?: synchronized(this) {
-                instance ?: buildDatabase(context).also { instance = it }
+                instance ?: buildDatabase(App.context).also { instance = it }
             }
         }
 
