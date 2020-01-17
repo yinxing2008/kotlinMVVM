@@ -3,12 +3,10 @@ package com.cxyzy.demo.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagedList
-import com.cxyzy.demo.ext.KoinInject.getFromKoin
 import com.cxyzy.demo.network.HttpRepository
 import com.cxyzy.demo.network.response.RepoResp
 
-class RepoViewModel : BaseViewModel() {
-    private val httpRepository = getFromKoin<HttpRepository>()
+object RepoViewModel : BaseViewModel() {
 //    lateinit var repoList: LiveData<PagedList<RepoResp>>
 
     var repoList: LiveData<PagedList<RepoResp>> = MutableLiveData()
@@ -36,7 +34,7 @@ class RepoViewModel : BaseViewModel() {
         launchOnUITryCatch(
                 {
                     tryBlock()
-                    repoList = httpRepository.getRepo()
+                    repoList = HttpRepository.getRepo()
                 },
                 {
                     catchBlock(it)
