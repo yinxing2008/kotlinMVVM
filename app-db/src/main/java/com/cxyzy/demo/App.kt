@@ -10,6 +10,7 @@ class App : Application() {
         super.onCreate()
         context = this
     }
+
     companion object {
         @SuppressLint("StaticFieldLeak")
         lateinit var context: Context

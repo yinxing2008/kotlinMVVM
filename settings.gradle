@@ -1,2 +1,1 @@
-include ':app-db', ':app-retrofit-nopaging', ':app-retrofit-paging',
-        ':app-db-koin', ':app-retrofit-nopaging-koin', ':app-retrofit-paging-koin'
+include ':app-db', ':app-retrofit-nopaging', ':app-retrofit-paging'

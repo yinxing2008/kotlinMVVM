@@ -7,5 +7,5 @@ import retrofit2.http.Query
 
 interface Api {
     @GET("/users/{user}/repos")
-    suspend fun repos(@Path("user") user: String, @Query("page") page: Int, @Query("per_page") perPage: Int):List<RepoResp>
+    suspend fun repos(@Path("user") user: String, @Query("page") page: Int, @Query("per_page") perPage: Int): List<RepoResp>
 }

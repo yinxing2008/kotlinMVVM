@@ -8,11 +8,10 @@ import com.cxyzy.demo.ui.adapter.RepoAdapter
 import com.cxyzy.demo.viewmodels.RepoViewModel
 import com.cxyzy.utils.ext.toast
 import kotlinx.android.synthetic.main.activity_repo.*
-import org.koin.android.viewmodel.ext.android.getViewModel
 
 class RepoActivity : BaseActivity<RepoViewModel>() {
     private val adapter = RepoAdapter()
-    override fun viewModel(): RepoViewModel = getViewModel()
+    override fun viewModel() = RepoViewModel
 
     override fun layoutId(): Int = R.layout.activity_repo
 
