@@ -17,7 +17,6 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
         setToolbar()
         initViews()
         initListeners()
-        startObserve()
         if (isRegisterEventBus()) {
             EventBus.getDefault().register(this)
         }
@@ -35,7 +34,6 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
     open fun prepareBeforeInitView() {}
     open fun initViews() {}
     open fun initListeners() {}
-    open fun startObserve() {}
 
     private fun observeVM() {
         lifecycle.addObserver(viewModel())

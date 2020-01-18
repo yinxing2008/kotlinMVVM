@@ -19,13 +19,13 @@ class RepoActivity : BaseActivity<RepoViewModel>() {
         rv.adapter = adapter
         adapter.setOnItemClick(this::onItemClick)
 
-        swipeRefreshLayout.setOnRefreshListener {
-            swipeRefreshLayout.isRefreshing = false
-        }
-        viewModel().getRepo(
-                {
-                    progressBar.visibility = View.VISIBLE
-                },
+        loadData()
+        progressBar.visibility = View.VISIBLE
+        swipeRefreshLayout.setOnRefreshListener { loadData() }
+    }
+
+    private fun loadData() {
+        viewModel().getRepo({},
                 {
                     toast(it.message.toString())
                 },
@@ -33,9 +33,10 @@ class RepoActivity : BaseActivity<RepoViewModel>() {
                     viewModel().repoList.observe(this, Observer {
                         adapter.submitList(it)
                         progressBar.visibility = View.GONE
+                        swipeRefreshLayout.isRefreshing = false
                     })
-                })
 
+                })
     }
 
     private fun onItemClick(repo: RepoResp) {
@@ -51,9 +52,4 @@ class RepoActivity : BaseActivity<RepoViewModel>() {
                     progressBar.visibility = View.GONE
                 })
     }
-
-    override fun startObserve() {
-
-    }
-
 }
