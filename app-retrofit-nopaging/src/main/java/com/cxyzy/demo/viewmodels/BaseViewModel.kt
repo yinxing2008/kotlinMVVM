@@ -54,7 +54,7 @@ open class BaseViewModel : ViewModel(), LifecycleObserver, CoroutineScope, LogUt
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-    fun onDestory() {
+    fun onDestroy() {
         clearLaunchTask()
     }
 
