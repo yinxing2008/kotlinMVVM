@@ -5,17 +5,17 @@ import com.cxyzy.demo.db.repository.TaskRepository
 object TaskViewModel : BaseViewModel() {
     val taskList = TaskRepository.getTaskList()
 
-    fun delTask(id: Int, tryBlock: () -> Unit, catchBlock: (throwable: Throwable) -> Unit, finallyBlock: () -> Unit) {
+    fun delTask(id: Int, onSuccess: () -> Unit, onError: (throwable: Throwable) -> Unit, onFinish: () -> Unit) {
         launchOnUITryCatch(
                 {
-                    tryBlock()
+                    onSuccess()
                     TaskRepository.delTask(id)
                 },
                 {
-                    catchBlock(it)
+                    onError(it)
                     error(it)
                 },
-                { finallyBlock() },
+                { onFinish() },
                 true)
     }
 }

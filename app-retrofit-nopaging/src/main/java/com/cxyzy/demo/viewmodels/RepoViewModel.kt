@@ -7,37 +7,36 @@ import com.cxyzy.demo.network.response.RepoResp
 object RepoViewModel : BaseViewModel() {
     var repoList: MutableLiveData<List<RepoResp>> = MutableLiveData()
 
-    fun getRepoDetail(id: String, tryBlock: () -> Unit, catchBlock: (throwable: Throwable) -> Unit, finallyBlock: () -> Unit) {
+    fun getRepoDetail(id: String, onSuccess: () -> Unit, onError: (throwable: Throwable) -> Unit, onFinish: () -> Unit) {
         launchOnUITryCatch(
                 {
-                    tryBlock()
+                    onSuccess()
                     //TODO: get RepoResp detail
                 },
                 {
-                    catchBlock(it)
+                    onError(it)
                     error(it)
                 },
-                { finallyBlock() },
+                { onFinish() },
                 true)
     }
 
     /**
-     * @param tryBlock 主要执行代码块
-     * @param catchBlock 异常处理代码块
-     * @param finallyBlock 无论是否异常都执行的代码块
+     * @param onSuccess 主要执行代码块
+     * @param onError 异常处理代码块
+     * @param onFinish 无论是否异常都执行的代码块
      */
-    fun getRepo(tryBlock: () -> Unit, catchBlock: (throwable: Throwable) -> Unit, finallyBlock: () -> Unit) {
+    fun getRepo(onSuccess: () -> Unit, onError: (throwable: Throwable) -> Unit, onFinish: () -> Unit) {
         launchOnUITryCatch(
                 {
-                    tryBlock()
+                    onSuccess()
                     repoList.value = HttpRepository.getRepo()
                 },
                 {
-                    catchBlock(it)
+                    onError(it)
                     error(it)
                 },
-                { finallyBlock() },
+                { onFinish() },
                 true)
-
     }
 }
