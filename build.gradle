@@ -22,7 +22,7 @@ buildscript {
         materialVersion = '1.0.0'
         navigationVersion = '1.0.0'
         recyclerViewVersion = '1.2.0-alpha01'
-        roomVersion = '2.2.3'
+        roomVersion = '2.2.5'
         runnerVersion = '1.0.1'
         supportLibraryVersion = '1.2.0-alpha01'
         uiAutomatorVersion = '2.2.0'
