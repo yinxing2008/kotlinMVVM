@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.cxyzy.demo.viewmodel.BaseViewModel
-import org.greenrobot.eventbus.EventBus
 
 abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
 
@@ -18,9 +17,6 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
         initViews()
         initListeners()
         startObserve()
-        if (isRegisterEventBus()) {
-            EventBus.getDefault().register(this)
-        }
     }
 
     private fun setToolbar() {
@@ -50,9 +46,6 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
     override fun onDestroy() {
         viewModel().let {
             lifecycle.removeObserver(it)
-        }
-        if (isRegisterEventBus()) {
-            EventBus.getDefault().unregister(this)
         }
         super.onDestroy()
     }
