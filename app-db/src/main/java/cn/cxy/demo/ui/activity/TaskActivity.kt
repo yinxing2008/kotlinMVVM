@@ -3,13 +3,14 @@ package cn.cxy.demo.ui.activity
 import android.view.View
 import androidx.lifecycle.Observer
 import cn.cxy.demo.R
+import cn.cxy.demo.base.BaseActivity
 import cn.cxy.demo.db.bean.Task
 import cn.cxy.demo.ui.adapter.TaskAdapter
 import cn.cxy.demo.viewmodel.TaskViewModel
 import com.cxyzy.utils.ext.toast
 import kotlinx.android.synthetic.main.activity_task.*
 
-class TaskActivity : BaseVmActivity<TaskViewModel>() {
+class TaskActivity : BaseActivity<TaskViewModel>() {
     private val adapter = TaskAdapter()
 
     override fun layoutResId() = R.layout.activity_task

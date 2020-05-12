@@ -2,11 +2,12 @@ package cn.cxy.demo.db.repository
 
 import androidx.paging.Config
 import androidx.paging.toLiveData
+import cn.cxy.demo.base.BaseRepository
 import cn.cxy.demo.db.bean.Task
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-object TaskRepository : BaseRepository() {
+class TaskRepository : BaseRepository() {
     private val taskDao = dbInstance.taskDao()
     fun getTaskList() = taskDao.getTaskList().toLiveData(Config(
             pageSize = 30,

@@ -1,4 +1,4 @@
-package cn.cxy.demo.db.repository
+package cn.cxy.demo.base
 
 import cn.cxy.demo.db.AppDatabase
 

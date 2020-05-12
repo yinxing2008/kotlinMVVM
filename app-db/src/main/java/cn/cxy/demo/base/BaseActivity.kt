@@ -1,11 +1,10 @@
-package cn.cxy.demo.ui.activity
+package cn.cxy.demo.base
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import cn.cxy.demo.viewmodel.BaseViewModel
 
-abstract class BaseVmActivity<VM : BaseViewModel> : AppCompatActivity() {
+abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
 
     protected open lateinit var mViewModel: VM
 
