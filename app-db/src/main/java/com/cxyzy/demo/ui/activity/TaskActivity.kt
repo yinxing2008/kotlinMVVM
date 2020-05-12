@@ -13,7 +13,7 @@ class TaskActivity : BaseActivity<TaskViewModel>() {
     private val adapter = TaskAdapter()
 
     override fun viewModel() = TaskViewModel
-    override fun layoutId(): Int = R.layout.activity_task
+    override fun layoutResId(): Int = R.layout.activity_task
 
     override fun initViews() {
         taskRv.adapter = adapter
@@ -37,7 +37,7 @@ class TaskActivity : BaseActivity<TaskViewModel>() {
                 })
     }
 
-    override fun startObserve() {
+    override fun observe() {
         viewModel().taskList.observe(this, Observer { adapter.submitList(it) })
     }
 

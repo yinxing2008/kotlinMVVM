@@ -2,7 +2,6 @@ package com.cxyzy.demo.ui.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import com.cxyzy.demo.viewmodel.BaseViewModel
 
 abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
@@ -10,47 +9,31 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
     protected abstract fun viewModel(): VM
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(layoutId())
+        setContentView(layoutResId())
         observeVM()
-        prepareBeforeInitView()
-        setToolbar()
         initViews()
         initListeners()
-        startObserve()
-    }
-
-    private fun setToolbar() {
-        providerToolBar()?.let { setSupportActionBar(it) }
+        observe()
     }
 
     /**
      * 布局文件id
      */
-    abstract fun layoutId(): Int
+    abstract fun layoutResId(): Int
 
     open fun prepareBeforeInitView() {}
     open fun initViews() {}
     open fun initListeners() {}
-    open fun startObserve() {}
+    open fun observe() {}
 
     private fun observeVM() {
         lifecycle.addObserver(viewModel())
     }
-
-    /**
-     *设置[Toolbar]
-     */
-    open fun providerToolBar(): Toolbar? = null
-
 
     override fun onDestroy() {
         viewModel().let {
             lifecycle.removeObserver(it)
         }
         super.onDestroy()
-    }
-
-    protected open fun isRegisterEventBus(): Boolean {
-        return false
     }
 }
