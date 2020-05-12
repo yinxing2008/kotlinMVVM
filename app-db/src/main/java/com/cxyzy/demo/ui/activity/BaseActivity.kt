@@ -2,38 +2,41 @@ package com.cxyzy.demo.ui.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.cxyzy.demo.viewmodel.BaseViewModel
 
-abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
+abstract class BaseVmActivity<VM : BaseViewModel> : AppCompatActivity() {
 
-    protected abstract fun viewModel(): VM
+    protected open lateinit var mViewModel: VM
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(layoutResId())
-        observeVM()
         initViews()
-        initListeners()
+        initViewModel()
         observe()
-    }
-
-    /**
-     * 布局文件id
-     */
-    abstract fun layoutResId(): Int
-
-    open fun prepareBeforeInitView() {}
-    open fun initViews() {}
-    open fun initListeners() {}
-    open fun observe() {}
-
-    private fun observeVM() {
-        lifecycle.addObserver(viewModel())
-    }
-
-    override fun onDestroy() {
-        viewModel().let {
-            lifecycle.removeObserver(it)
+        // 因为Activity恢复后savedInstanceState不为null，
+        // 重新恢复后会自动从ViewModel中的LiveData恢复数据，
+        // 不需要重新初始化数据。
+        if (savedInstanceState == null) {
+            initData()
         }
-        super.onDestroy()
+    }
+
+    private fun initViewModel() {
+        mViewModel = ViewModelProvider(this).get(viewModelClass())
+    }
+
+    protected abstract fun viewModelClass(): Class<VM>
+    protected abstract fun layoutResId(): Int
+
+    open fun initViews() {
+        // Override if need
+    }
+
+    open abstract fun observe()
+
+    open fun initData() {
+        // Override if need
     }
 }

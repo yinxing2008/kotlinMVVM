@@ -1,64 +1,63 @@
 package com.cxyzy.demo.viewmodel
 
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.OnLifecycleEvent
 import androidx.lifecycle.ViewModel
-import com.cxyzy.utils.LogUtils
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.*
-import kotlin.coroutines.CoroutineContext
 
-open class BaseViewModel : ViewModel(), LifecycleObserver, CoroutineScope, LogUtils {
-    override val coroutineContext: CoroutineContext
-        get() = Dispatchers.Main
-    private val mLaunchManager: MutableList<Job> = mutableListOf()
+typealias Block<T> = suspend () -> T
+typealias Error = suspend (e: Exception) -> Unit
+typealias Cancel = suspend (e: Exception) -> Unit
 
-    protected fun launchOnUITryCatch(tryBlock: suspend CoroutineScope.() -> Unit,
-                                     catchBlock: suspend CoroutineScope.(Throwable) -> Unit,
-                                     finallyBlock: suspend CoroutineScope.() -> Unit,
-                                     handleCancellationExceptionManually: Boolean
-    ) {
-        launchOnUI {
-            tryCatch(tryBlock, catchBlock, finallyBlock, handleCancellationExceptionManually)
-        }
-    }
+open class BaseViewModel : ViewModel() {
 
     /**
-     * add launch task to [mLaunchManager]
+     * 创建并执行协程
+     * @param block 协程中执行
+     * @param error 错误时执行
+     * @return Job
      */
-    private fun launchOnUI(block: suspend CoroutineScope.() -> Unit) {
-        val job = launch { block() }
-        mLaunchManager.add(job)
-        job.invokeOnCompletion { mLaunchManager.remove(job) }
-
-    }
-
-    private suspend fun tryCatch(
-            tryBlock: suspend CoroutineScope.() -> Unit,
-            catchBlock: suspend CoroutineScope.(Throwable) -> Unit,
-            finallyBlock: suspend CoroutineScope.() -> Unit,
-            handleCancellationExceptionManually: Boolean = false) {
-        coroutineScope {
+    protected fun launch(block: Block<Unit>, error: Error? = null, cancel: Cancel? = null): Job {
+        return viewModelScope.launch {
             try {
-                tryBlock()
-            } catch (e: Throwable) {
-                if (e !is CancellationException || handleCancellationExceptionManually) {
-                    catchBlock(e)
+                block.invoke()
+            } catch (e: Exception) {
+                when (e) {
+                    is CancellationException -> {
+                        cancel?.invoke(e)
+                    }
+                    else -> {
+                        onError(e)
+                        error?.invoke(e)
+                    }
                 }
-                error(e)
-            } finally {
-                finallyBlock()
             }
         }
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-    fun onDestory() {
-        clearLaunchTask()
+    /**
+     * 创建并执行协程
+     * @param block 协程中执行
+     * @return Deferred<T>
+     */
+    protected fun <T> async(block: Block<T>): Deferred<T> {
+        return viewModelScope.async { block.invoke() }
     }
 
-    private fun clearLaunchTask() {
-        mLaunchManager.clear()
+    /**
+     * 取消协程
+     * @param job 协程job
+     */
+    protected fun cancelJob(job: Job?) {
+        if (job != null && job.isActive && !job.isCompleted && !job.isCancelled) {
+            job.cancel()
+        }
     }
 
+    /**
+     * 统一处理错误
+     * @param e 异常
+     */
+    private fun onError(e: Exception) {
+
+    }
 }

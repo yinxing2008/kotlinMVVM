@@ -9,11 +9,12 @@ import com.cxyzy.demo.viewmodel.TaskViewModel
 import com.cxyzy.utils.ext.toast
 import kotlinx.android.synthetic.main.activity_task.*
 
-class TaskActivity : BaseActivity<TaskViewModel>() {
+class TaskActivity : BaseVmActivity<TaskViewModel>() {
     private val adapter = TaskAdapter()
 
-    override fun viewModel() = TaskViewModel
-    override fun layoutResId(): Int = R.layout.activity_task
+    override fun layoutResId() = R.layout.activity_task
+
+    override fun viewModelClass() = TaskViewModel::class.java
 
     override fun initViews() {
         taskRv.adapter = adapter
@@ -25,7 +26,7 @@ class TaskActivity : BaseActivity<TaskViewModel>() {
     }
 
     private fun onItemClick(task: Task) {
-        viewModel().delTask(task.id,
+        mViewModel.delTask(task.id,
                 {
                     progressBar.visibility = View.VISIBLE
                 },
@@ -38,7 +39,7 @@ class TaskActivity : BaseActivity<TaskViewModel>() {
     }
 
     override fun observe() {
-        viewModel().taskList.observe(this, Observer { adapter.submitList(it) })
+        mViewModel.taskList.observe(this, Observer { adapter.submitList(it) })
     }
 
 }
