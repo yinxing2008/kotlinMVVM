@@ -1,4 +1,4 @@
-package com.cxyzy.demo.viewmodels
+package com.cxyzy.demo.viewmodel
 
 import com.cxyzy.demo.db.repository.TaskRepository
 

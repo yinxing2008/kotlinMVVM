@@ -5,7 +5,7 @@ import androidx.lifecycle.Observer
 import com.cxyzy.demo.R
 import com.cxyzy.demo.db.bean.Task
 import com.cxyzy.demo.ui.adapter.TaskAdapter
-import com.cxyzy.demo.viewmodels.TaskViewModel
+import com.cxyzy.demo.viewmodel.TaskViewModel
 import com.cxyzy.utils.ext.toast
 import kotlinx.android.synthetic.main.activity_task.*
 

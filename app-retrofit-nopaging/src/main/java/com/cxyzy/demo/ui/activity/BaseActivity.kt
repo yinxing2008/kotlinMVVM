@@ -3,7 +3,7 @@ package com.cxyzy.demo.ui.activity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import com.cxyzy.demo.viewmodels.BaseViewModel
+import com.cxyzy.demo.viewmodel.BaseViewModel
 import org.greenrobot.eventbus.EventBus
 
 abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {

@@ -1,4 +1,4 @@
-package com.cxyzy.demo.viewmodels
+package com.cxyzy.demo.viewmodel
 
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver

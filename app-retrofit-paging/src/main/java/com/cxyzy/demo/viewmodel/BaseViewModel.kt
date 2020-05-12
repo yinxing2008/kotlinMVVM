@@ -1,4 +1,4 @@
-package com.cxyzy.demo.viewmodels
+package com.cxyzy.demo.viewmodel
 
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
@@ -14,12 +14,12 @@ open class BaseViewModel : ViewModel(), LifecycleObserver, CoroutineScope, LogUt
     private val mLaunchManager: MutableList<Job> = mutableListOf()
 
     protected fun launchOnUITryCatch(tryBlock: suspend CoroutineScope.() -> Unit,
-                                     catchBlock: suspend CoroutineScope.(Throwable) -> Unit,
+                                     cacheBlock: suspend CoroutineScope.(Throwable) -> Unit,
                                      finallyBlock: suspend CoroutineScope.() -> Unit,
                                      handleCancellationExceptionManually: Boolean
     ) {
         launchOnUI {
-            tryCatch(tryBlock, catchBlock, finallyBlock, handleCancellationExceptionManually)
+            tryCatch(tryBlock, cacheBlock, finallyBlock, handleCancellationExceptionManually)
         }
     }
 
@@ -44,8 +44,9 @@ open class BaseViewModel : ViewModel(), LifecycleObserver, CoroutineScope, LogUt
             } catch (e: Throwable) {
                 if (e !is CancellationException || handleCancellationExceptionManually) {
                     catchBlock(e)
+                } else {
+                    throw e
                 }
-                error(e)
             } finally {
                 finallyBlock()
             }

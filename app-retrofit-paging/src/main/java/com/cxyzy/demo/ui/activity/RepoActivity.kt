@@ -5,7 +5,7 @@ import androidx.lifecycle.Observer
 import com.cxyzy.demo.R
 import com.cxyzy.demo.network.response.RepoResp
 import com.cxyzy.demo.ui.adapter.RepoAdapter
-import com.cxyzy.demo.viewmodels.RepoViewModel
+import com.cxyzy.demo.viewmodel.RepoViewModel
 import com.cxyzy.utils.ext.toast
 import kotlinx.android.synthetic.main.activity_repo.*
 
