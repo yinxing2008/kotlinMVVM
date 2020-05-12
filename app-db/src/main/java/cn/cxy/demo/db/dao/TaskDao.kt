@@ -1,11 +1,11 @@
-package com.cxyzy.demo.db.dao
+package cn.cxy.demo.db.dao
 
 import androidx.paging.DataSource
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
-import com.cxyzy.demo.db.bean.Task
+import cn.cxy.demo.db.bean.Task
 
 @Dao
 interface TaskDao {

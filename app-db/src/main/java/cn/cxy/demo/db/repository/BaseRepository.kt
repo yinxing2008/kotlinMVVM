@@ -1,6 +1,6 @@
-package com.cxyzy.demo.db.repository
+package cn.cxy.demo.db.repository
 
-import com.cxyzy.demo.db.AppDatabase
+import cn.cxy.demo.db.AppDatabase
 
 open class BaseRepository {
     val dbInstance = AppDatabase.getInstance()

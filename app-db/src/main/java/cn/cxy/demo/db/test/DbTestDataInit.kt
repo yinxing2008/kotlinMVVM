@@ -1,10 +1,10 @@
-package com.cxyzy.demo.db.test
+package cn.cxy.demo.db.test
 
 import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
-import com.cxyzy.demo.db.AppDatabase
-import com.cxyzy.demo.db.bean.Task
+import cn.cxy.demo.db.AppDatabase
+import cn.cxy.demo.db.bean.Task
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 

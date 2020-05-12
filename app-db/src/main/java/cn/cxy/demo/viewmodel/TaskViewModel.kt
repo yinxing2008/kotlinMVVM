@@ -1,6 +1,6 @@
-package com.cxyzy.demo.viewmodel
+package cn.cxy.demo.viewmodel
 
-import com.cxyzy.demo.db.repository.TaskRepository
+import cn.cxy.demo.db.repository.TaskRepository
 
 class TaskViewModel : BaseViewModel() {
     val taskList = TaskRepository.getTaskList()

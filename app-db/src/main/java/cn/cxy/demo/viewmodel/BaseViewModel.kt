@@ -1,4 +1,4 @@
-package com.cxyzy.demo.viewmodel
+package cn.cxy.demo.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

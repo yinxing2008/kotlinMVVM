@@ -1,4 +1,4 @@
-package com.cxyzy.demo
+package cn.cxy.demo
 
 import android.annotation.SuppressLint
 import android.app.Application

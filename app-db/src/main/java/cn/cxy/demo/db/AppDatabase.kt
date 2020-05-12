@@ -1,4 +1,4 @@
-package com.cxyzy.demo.db
+package cn.cxy.demo.db
 
 import android.content.Context
 import androidx.room.Database
@@ -7,11 +7,11 @@ import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
-import com.cxyzy.demo.App
-import com.cxyzy.demo.db.bean.Task
-import com.cxyzy.demo.db.dao.TaskDao
-import com.cxyzy.demo.db.test.DbTestDataInit
-import com.cxyzy.demo.utils.DATABASE_NAME
+import cn.cxy.demo.App
+import cn.cxy.demo.db.bean.Task
+import cn.cxy.demo.db.dao.TaskDao
+import cn.cxy.demo.db.test.DbTestDataInit
+import cn.cxy.demo.utils.DATABASE_NAME
 
 
 @Database(entities = [Task::class], version = 1, exportSchema = false)
@@ -27,7 +27,8 @@ abstract class AppDatabase : RoomDatabase() {
 
         fun getInstance(): AppDatabase {
             return instance ?: synchronized(this) {
-                instance ?: buildDatabase(App.context).also { instance = it }
+                instance
+                        ?: buildDatabase(App.context).also { instance = it }
             }
         }
 

@@ -1,4 +1,4 @@
-package com.cxyzy.demo.db.bean
+package cn.cxy.demo.db.bean
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

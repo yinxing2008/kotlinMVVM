@@ -1,9 +1,9 @@
-package com.cxyzy.demo.ui.activity
+package cn.cxy.demo.ui.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.cxyzy.demo.viewmodel.BaseViewModel
+import cn.cxy.demo.viewmodel.BaseViewModel
 
 abstract class BaseVmActivity<VM : BaseViewModel> : AppCompatActivity() {
 

@@ -1,4 +1,4 @@
-package com.cxyzy.demo.ui.adapter
+package cn.cxy.demo.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.cxyzy.demo.R
-import com.cxyzy.demo.db.bean.Task
+import cn.cxy.demo.R
+import cn.cxy.demo.db.bean.Task
 import kotlinx.android.synthetic.main.item_task.view.*
 
 class TaskAdapter : PagedListAdapter<Task, TaskAdapter.ViewHolder>(DiffCallback()) {
