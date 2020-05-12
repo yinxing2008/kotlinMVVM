@@ -27,7 +27,7 @@ buildscript {
         supportLibraryVersion = '1.2.0-alpha01'
         uiAutomatorVersion = '2.2.0'
         workVersion = '1.0.1'
-        pagingVersion = '2.1.1'
+        pagingVersion = '2.1.2'
         retrofitVersion = '2.6.0'
         okhttpVersion = '3.9.1'
         loggingInterceptorVersion = '3.11.0'
